@@ -20,6 +20,8 @@
 <li><a href="seigyo.php">制御構文</a></li>
 <li><a href="kansu.php">関数</a></li>
 </ul>
+
+
 <ul>
 <li><a href="write.php">ファイル書き込み</a></li>
 <li><a href="read.php">ファイル読み込む</a></li>
