@@ -59,7 +59,7 @@ if($_POST['name']==""){
       $body .= "自由記入欄：\n".htmlspecialchars(post('free'))."\n";
     }
     
-   var_dump($body);
+   
 
   $title_01 = "お問い合わせありがとうございます";
   $title_02 = "お問い合わせ完了";
@@ -70,11 +70,41 @@ if($_POST['name']==""){
   // mb_send_mail($_POST['mail'], mb_convert_encoding($title_02, "UTF-8", "auto"), mb_convert_encoding($body, "UTF-8", "auto"),'From:'.$mail_to);
   // mb_send_mail($mail_to, mb_convert_encoding($title_01, "UTF-8", "auto"), mb_convert_encoding($body, "UTF-8", "auto"),'From:'.$_POST['mail']);
 
+  	$checkList = "";
+	foreach ($checkArr as $key => $value) {
+		// var_dump($checkArr);
 
+		if($key < $total - 1){
+	  		$checkList .= htmlspecialchars($value."・");
+		}else {
+			$checkList .= htmlspecialchars($value);
+		}
+	  
+	}
+	$dataList = array (
+		array(
+			htmlspecialchars(post('name')),
+			htmlspecialchars(post('mail')),
+			htmlspecialchars(post('age')),
+			htmlspecialchars(post('sex')),
+			htmlspecialchars(post('address')),
+			$checkList,
+			htmlspecialchars(post('free'))
+		)
+	);
+
+	$file = fopen("data.csv","a");	// ファイル読み込み
+	flock($file, LOCK_EX);			// ファイルロック
+	foreach ($dataList as $fields) {
+	    fputcsv($file, $fields);
+	}
+	// fputs($file, $dataList . PHP_EOL);//PHP_EOLは改行
+	flock($file, LOCK_UN);			// ファイルロック解除
+	fclose($file);
 
 	?>
 	<p class="lead">お問い合わせありがとうございます！</p>
-	
+	<a href="index.php">TOPへ戻る</a>
 			
 <?php } else { ?>
 	アクセス不可です。

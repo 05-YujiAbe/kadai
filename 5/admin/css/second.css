@@ -1,0 +1,214 @@
+.section
+{
+	padding: 2%;
+	margin-bottom: 40px;
+}
+.control h3
+{
+	margin: 0 0 0 2%;
+	line-height: 36px;
+}
+
+.tbl
+{
+	width: 100%;
+	margin-bottom: 20px;
+}
+.tbl th,
+.tbl td
+{
+	padding: 3% 2%;
+}
+.tbl th
+{
+	text-align: left;
+	width: 20%;
+	vertical-align: top;
+}
+.tbl th.wid30
+{
+	width: 30%;
+}
+.tbl th small
+{
+	color: #bf3939;
+}
+.tbl td
+{
+	line-height: 160%;
+}
+.tbl td label
+{
+	margin-right: 10px;
+	margin-bottom: 5px;
+}
+
+.tbl td input[type="text"]
+{
+	width: 70%;
+	padding: 2px 2px;
+	vertical-align: middle;
+	height: 20px;
+	line-height: 20px;
+	margin-right: 3px;
+}
+.tbl td textarea
+{
+	padding: 2px;
+}
+.tbl2 td input[type="text"]
+{
+	width: 90%;
+}
+.tbl2 td input.wid45
+{
+	width: 45%;
+}
+.tbl2 td input.wid30
+{
+	width: 30%;
+}
+.tbl2 td input.wid20
+{
+	width: 20%;
+}
+.tbl2 td input.wid10
+{
+	width: 10%;
+	margin-left: 3px;
+}
+.tbl2 td input[type="checkbox"],
+.tbl2 td input[type="radio"]
+{
+	margin-right: 6px;
+}
+.tbl2 td select
+{
+	margin: 0 3px;
+}
+.odd
+{
+	background-color: #fcfcfc;
+}
+.entryBtn
+{
+	margin: 0 0 0 2%;
+}
+.allCtrl_area
+{
+	position: relative;
+	z-index: 10;
+	padding: 2%;
+	background-color: #F4F4F4;
+	clear: both;
+	display: none;
+}
+
+.itemList
+{
+	width: 100%;
+}
+.itemList li
+{
+	float: left;
+	margin: 0 20px 20px 0;
+}
+.itemList li.mb
+{
+	margin-bottom: 30px;
+}
+.itemList li p
+{
+	margin-bottom: 10px;
+}
+.search_area textarea
+{
+	width: 140px;
+}
+.search_area .itemList
+{
+	text-align: left;
+}
+
+.edit_area
+{
+	width: 100%;
+}
+.editCtrl
+{
+	float: left;
+	margin: 8px 0 0 2%;
+}
+.editName
+{
+	float: right;
+	margin: 8px 2% 0 0;
+	color: #bf3939;
+	font-weight: bold;
+}
+.preview
+{
+	text-align: right;
+	margin-bottom: 10px;
+}
+.red
+{
+	color: #F00;
+}
+.msg_box
+{
+	width: 100%;
+}
+.msg_box p
+{
+	padding: 1% 2%;
+	color: #fff;
+	box-shadow: 0 0 1px #fff inset;
+}
+.msg_box .error
+{
+	border: 1px solid #bf3939;
+	background-color: #d15656;
+}
+.msg_box .success
+{
+	border: 1px solid #4dae2c;
+	background-color: #76d156;
+}
+.msg_box .text
+{
+	color: #363636;
+	font-weight: bold;
+}
+.msg_box .text small
+{
+	color: #bf3939;
+}
+
+.area_check
+{
+}
+.area_check p
+{
+	margin: 5px 0 5px 0;
+	font-weight: bold;
+}
+.all_check
+{
+	font-weight: normal;
+}
+.tbl2 .photo img
+{
+	margin-right: 5px;
+}
+.attend
+{
+	padding: 10px 0 10px 7px;
+	margin-left: 3px; 
+	border-top: 1px solid #eaeaea;
+}
+.tbl2 td span
+{
+	vertical-align: top;
+	margin-left: 3px;
+}

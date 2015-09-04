@@ -1,0 +1,27 @@
+@media screen and (max-width: 900px)    {
+   img {
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
+	}
+}
+ 
+@media screen and (max-width: 720px)    {
+   
+
+}
+ 
+@media screen and (max-width: 480px) {
+	
+   img {
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
+	}
+	.video embed,
+	.video object,
+	.video iframe {
+    width: 100%;
+    height: auto;
+	}
+}

@@ -1,0 +1,174 @@
+@charset "utf-8";
+
+
+*
+{
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, Arial, sans-serif;
+    background-repeat: no-repeat;
+}
+
+/* content  */
+
+.mb5
+{
+    margin-bottom: 5px;
+}
+.mb10
+{
+    margin-bottom: 10px;
+}
+.mb20
+{
+    margin-bottom: 20px;
+}
+.mt5
+{
+    margin-top: 5px;
+}
+.mt10
+{
+    margin-top: 10px;
+}
+.mt20
+{
+    margin-top: 20px;
+}
+.mr20
+{
+    margin-right: 20px;
+}
+.ml20
+{
+    margin-left: 20px;
+}
+
+.nb
+{
+    border: none;
+    border: 0;
+}
+.left
+{
+    float: left;
+}
+.right
+{
+    float: right;
+}
+.left_
+{
+    float: left;
+}
+.right_
+{
+    float: right;
+}
+.center
+{
+    width: 100%;
+    text-align: center;
+    clear: both;
+    overflow: hidden;
+}
+
+.bdr_top
+{
+	border-top: 1px solid #009046;
+}
+
+.font10
+{
+	font-size: 10px;
+}
+
+.t_right
+{
+	text-align: right;
+}
+
+.font_b
+{
+	font-weight: bold;
+}
+
+table 
+{
+	border-collapse: collapse; 
+	border-spacing: 0; 
+	font-size: inherit;
+}
+
+ul,dl,ol
+{
+	text-indent: 0;
+}
+
+li
+{
+	list-style: none;
+}
+
+img 
+{
+	border: 0;
+}
+
+
+
+/* LINK */
+a,
+a:link,
+a:visited {
+    color: #0a8cad;
+    text-decoration: none;
+}
+a:hover {
+    color: #0a8cad;
+    text-decoration: underline;
+}
+a:active {}
+a img {
+    border: none;
+}
+
+.clearfix:after {
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+.clearfix {display: inline-block;}
+/* Hides from IE-mac \*/
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+/* End hide from IE-mac */
+
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section { 
+	display:block;
+}

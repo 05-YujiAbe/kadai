@@ -36,6 +36,7 @@ textarea:focus {
 }
 main .lead {
     color: #fff;
+    margin-bottom: 5%;
 }
 main {
     width: 600px;
