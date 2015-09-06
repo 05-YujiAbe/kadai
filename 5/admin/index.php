@@ -1,4 +1,5 @@
 <?php
+require "../function.php";
 $csv  = array();
 $file = '../data.csv';
 $fp   = fopen($file, "r");
@@ -10,8 +11,24 @@ fclose($fp);
 
     if (count($_POST) > 0) {
         if(post("all") == "delete"){
-            
+           foreach($csv as $key => $value){
+                if(post($key) == "on"){
+                    // array_splice($csv,$key);
+                    unset($csv[$key]);
+
+                }
+           }
+           $csv = array_merge( $csv );
+           $file = fopen("../data.csv","w");   // ファイル読み込み
+            flock($file, LOCK_EX);          // ファイルロック
+            foreach ($csv as $fields) {
+                fputcsv($file, $fields);
+            }
+            // fputs($file, $dataList . PHP_EOL);//PHP_EOLは改行
+            flock($file, LOCK_UN);          // ファイルロック解除
+            fclose($file);
         }
+        $_POST = array();
     }
 ?>
 
@@ -91,10 +108,10 @@ fclose($fp);
              	<div class="head"><span class="wd5"><input type="checkbox" name=""></span><span class="wd15">お名前</span><span class="wd20">E-mail</span><span class="wd10">年齢</span><span class="wd10">性別</span><span class="wd10">住まい</span><span class="wd15">趣味</span><span class="wd20">自由記入欄</span></div>
                 <table>
                 <?php 
-foreach (array_reverse($csv) as $key => $value) {
-     echo '<tr><td class="wd5"><input type="checkbox" name="list'. $key .'" class="check"></td><td class="wd15"><a href="">'. $value[0] .'</a></td><td class="wd20 mailOpen"><a href="">'. $value[1] .'</a></td><td class="wd10">'. $value[2] .'</td><td class="wd10">'. $value[3] .'</td><td class="wd10">'. $value[4] .'</td><td class="wd15">'. $value[5] .'</td><td class="wd20">'. $value[6] .'</td></tr>';
-}
-    ?>
+                    foreach ($csv as $key => $value) {
+                         echo '<tr><td class="wd5"><input type="checkbox" name="'. $key .'" class="check"></td><td class="wd15"><a href="">'. $value[0] .'</a></td><td class="wd20 mailOpen"><a href="">'. $value[1] .'</a></td><td class="wd10">'. $value[2] .'</td><td class="wd10">'. $value[3] .'</td><td class="wd10">'. $value[4] .'</td><td class="wd15">'. $value[5] .'</td><td class="wd20">'. $value[6] .'</td></tr>';
+                    }
+                ?>
                 	<!-- <tr><td class="wd5"><input type="checkbox" name="" class="check"></td><td class="wd15"><a href="">テストタロウ</a></td><td class="wd20 mailOpen"><a href="">xxxxxx@.co.jp</a></td><td class="wd10">20</td><td class="wd10">男</td><td class="wd10">東京都</td><td class="wd15">サッカー・フットサル</td><td class="wd20">自由記入欄</td></tr> -->
                     
                 </table>
