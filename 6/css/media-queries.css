@@ -1,0 +1,194 @@
+@media screen and (max-width: 900px)    {
+   img {
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
+	}
+}
+ 
+@media screen and (max-width: 768px)    {
+    body{
+        font-size: 12px;
+    }
+    .pageTop{
+        width: 70px;
+        height: 55px; 
+        -webkit-background-size: 100%;
+             -o-background-size: 100%;
+                background-size: 100%;
+    }
+    .headContent
+    {
+        padding: 3% 0;
+    }
+    .headContent h1 {
+    float: left;
+    }
+    .headContent h1 {
+        float: none;
+        text-align: center;
+        padding: 0 5%;
+    }
+    .headContent p {
+        display: none;
+    }
+    .catchCopy {
+        margin-top: -30px;
+    }
+    .catchCopy h2 {
+    font-size: 24px;
+    margin-bottom: 3%;
+    }
+    .catchCopy p {
+        font-size: 14px;
+    }
+    #contents section h3 {
+        font-size: 18px;
+    }
+    #contents section h3 span {
+        font-size: 12px;
+        margin-top: 10px;
+    }
+    .newsArea,
+    .featureArea {
+        padding: 4% 3%;
+        -webkit-box-sizing: border-box;
+           -moz-box-sizing: border-box;
+                box-sizing: border-box;
+    }
+    .newsArea h3,
+    .newsContent dl {
+        margin-bottom: 5%;
+    }
+    .newsContent dd {
+        margin-left: 7em;
+    }
+    .featureArea li {
+        float: none;
+        margin-right: 0px;
+        text-align: center;
+        margin-bottom: 3%;
+    }
+    .courseArea {
+        padding-bottom: 5%;
+    }
+    .courseArea h3 {
+        background-color: #fcfcfc;
+        margin-bottom: 5%;
+        padding: 5% 0;
+    }
+    .courseContent dl dt {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 2%;
+    }
+    .courseArea .courseContent dl dd {
+        width: 80%;
+        margin: 0 auto;
+        float: none;
+    }
+    .courseContent dl dd h4{
+        font-size: 14px;
+        margin: 3% 0;
+    }
+    .galleryArea {
+        padding: 0 0 3% 0;
+    }
+    .galleryArea h3,
+    .contactArea h3 {
+        padding: 4% 0;
+        margin-bottom: 5%;
+    }
+    .galleryContent {
+        width: 100%;
+        margin: 0 auto;
+        overflow: hidden;
+        clear: both;
+    }
+    .galleryContent ul {
+        width: 100%;
+    }
+    .galleryContent ul li {
+        width: 50%;
+        margin: 0 0 2% 0;
+        padding: 0 1%;
+        text-align: center;
+        -webkit-box-sizing: border-box;
+           -moz-box-sizing: border-box;
+                box-sizing: border-box;
+    }
+    .galleryContent ul li a {
+    height: 100px;
+}
+    .contactArea {
+        padding: 0 0 5% 0;
+    }
+    .contactContent {
+        padding: 0 3%;
+        margin: 0 auto;
+    }
+    .contactContent dl {
+        width: 100%;
+        margin-bottom: 5%;
+    }
+    .contactContent dt {
+        float: none;
+        width: 100%;
+        margin-bottom: 3%;
+        background-color: #eee;
+        padding: 3px 0 3px 5px;
+    }
+    .contactContent dd {
+        margin-left: 0;
+        clear: right;
+        margin-bottom: 3%;
+    }
+    .contactContent input[type="text"],
+    .contactContent dd ul li {
+        -webkit-box-sizing: border-box;
+           -moz-box-sizing: border-box;
+                box-sizing: border-box;
+        width: 100%;
+    }
+    .btnEntry input{
+        max-width: 100%;
+    }
+    .contactContent dd ul li {
+        border: 1px solid #ddd;
+        padding: 5px 10px;
+    }
+    .contactContent dd ul li label {
+        display: block;
+    }
+    .infoContent li {
+        float: none;
+        width: 100%;
+        height: 210px;
+        margin-right: 0px;
+    }
+    .infoContent li iframe{
+        width: 100%;
+        height: 100%;
+    }
+    .infoContent li.img {
+        display: none;
+    }
+    .infoContent p {
+        font-size: 12px;
+    }
+}
+ 
+@media screen and (max-width: 480px) {
+	
+   img {
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
+	}
+	.video embed,
+	.video object,
+	.video iframe {
+    width: 100%;
+    height: auto;
+	}
+}

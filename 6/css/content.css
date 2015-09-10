@@ -1,0 +1,48 @@
+.news-list {
+	width: 880px;
+	overflow: hidden;
+
+	margin: 0 auto;
+}
+.news-list li {
+	margin: 0 20px 40px 20px;
+	float: left;
+	width: 400px;
+}
+.news-list li a {
+	color: #000;
+	text-decoration: none;
+}
+.news-list li a:hover img,
+.news-list li a:hover dd {
+	filter:alpha(opacity="80");
+	opacity: 0.8;
+	MozOpacity: 0.8;
+}
+
+.news-list li dt {
+	height: 240px;
+	overflow: hidden;
+	margin-bottom: 15px;
+}
+.news-list li dt img {
+	width: 100%;
+	height: auto;
+}
+.news-list li dd.sub {
+	overflow: hidden;
+	clear: both;
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+.sub span.date {
+	float: left;
+}
+.sub span.cat {
+	float: right;
+	color: #00a7ea;
+}
+.news-list li dd {
+	font-size: 16px;
+	font-weight: bold;
+}
