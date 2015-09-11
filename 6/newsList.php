@@ -1,7 +1,18 @@
 <?php 
+
 $pdo = new PDO("mysql:host=localhost;dbname=cs_academy;charset=utf8", "root", "");
-$sql = "SELECT * FROM news ORDER BY news_id DESC LIMIT 10";
-$cat = "SELECT * FROM category";
+
+if(isset($_GET["cat"])){
+    $cat_id = $_GET['cat'];
+    $sql = "SELECT * FROM news where news_cat = $cat_id ORDER BY news_id DESC LIMIT 10";
+    $cat = "SELECT * FROM category where cat_id = $cat_id";
+
+}else{
+
+    $sql = "SELECT * FROM news ORDER BY news_id DESC LIMIT 10";
+    $cat = "SELECT * FROM category";
+}
+
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -25,8 +36,9 @@ include "header.php";
     
         <h2 class="section-title text-center">
             <span class="section-title__yellow">News</span>
-
+            <?php if(isset($_GET["cat"])){ ?>
             <span class="section-title-ja text-center"><?php echo $catresults[0]["cat_name"]; ?></span>
+            <?php } ?>
         </h2>
         <ul class="news-list">
         <?php foreach($results as $key => $value){ ?>
@@ -36,10 +48,14 @@ include "header.php";
                 <dd class="sub"><span class="date"><?php echo date('Y.n.j.', strtotime($value["create_date"]));
                     ?></span>
                     <span class="cat">
+                    <?php if(isset($_GET["cat"])){ 
+                        echo $catresults[0]["cat_slug"];
+                     }else{
+                        echo getCat($value["news_cat"]); 
+                     }
+                     ?>
+                
 
-                    <?php echo getCat($value["news_cat"]);
-                    //echo $catresults[$value["news_cat"]-1]["cat_slug"]; 
-                    ?>
                     </span>
                 </dd>
                 <dd><?php echo $value["news_title"];?></dd>

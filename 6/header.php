@@ -39,7 +39,7 @@
 <div id="wrapper">
 <header id="header">
     <div class="headContent">
-        <h1><img src="images/logo.png" alt="Cheese ACADEMY TOKYO"></h1>
+        <h1><a href="index.php"><img src="images/logo.png" alt="Cheese ACADEMY TOKYO"></a></h1>
         <p>CHEESE DEVELOPMENT<br>
         GROWTH CHEESE<br>
         CHEESE PERSPECTIVE<br>

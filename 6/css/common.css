@@ -46,6 +46,17 @@ body
 	font-weight: bold;
 	margin-top: 3px;
 }
+.tagCat {
+	color: #00a7ea;
+	border: 1px solid #00a7ea;
+	padding: 3px 5px;
+	width: 10em;
+	margin-right: 10px;
+}
+.tagCat a {
+	color: #00a7ea;
+	text-decoration: none;
+}
 #mainVisual,
 #mainVisual:before {
 	background: url(../images/bg-cheese.jpg) no-repeat left top;
@@ -143,6 +154,7 @@ body
 }
 .newsContent dd {
 	margin-left: 105px;
+	margin-bottom: 10px;
 }
 .newsContent dd a {
 	color: #000;

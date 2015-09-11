@@ -12,6 +12,7 @@ $resultsAll = $stmtAll->fetchAll(PDO::FETCH_ASSOC);
 foreach($resultsAll as $key => $value){
      $arr_news[] = $value['news_id'];
 }
+//idが配列にあるかどうかのチェック
 function linkCheck($id) {
     global $arr_news;
     return in_array($id,$arr_news);

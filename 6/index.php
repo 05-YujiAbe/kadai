@@ -5,6 +5,10 @@ $sql = "SELECT * FROM news ORDER BY news_id DESC LIMIT 5";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$cat = "SELECT * FROM category";
+$catstmt = $pdo->prepare($cat);
+$catstmt->execute();
+$catresults = $catstmt->fetchAll(PDO::FETCH_ASSOC);
 
 $pdo = null;
 // 文字を指定した数にカット
@@ -13,6 +17,10 @@ function letter($key,$num) {
       $key = mb_substr($key,0,$num) . "...";
     }
     return $key;
+}
+function getCat($num) {
+    global $catresults;
+    return $catresults[$num-1]["cat_slug"];
 }
 
 include "header.php";
@@ -33,7 +41,11 @@ include "header.php";
                     ?>
                     <dt>
                     <?php echo date('Y年n月j日', strtotime($value["create_date"]));
-                    ?></dt>
+                    ?>
+                    <span class="tagCat">
+                    <a href="newsList.php?cat=<?php echo $value["news_cat"]?>">
+                    <?php echo getCat($value["news_cat"]); ?></span></a>
+                    </dt>
                     <dd>
                         <a href="news.php?news_id=<?php echo $value["news_id"]?>"><?php echo letter($value["news_title"],10);?></a>
                     </dd>
