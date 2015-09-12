@@ -36,6 +36,7 @@ include "header.php";
         <article class="news-detail">
             <dl class="clearfix">
                 <dd class="news-title"><?php echo $value["news_title"];?></dd>
+                <dd class="news-photo"><img src="<?php echo $value["news_url"];?>" alt=""></dd>
                 <dd><?php echo $value["news_detail"];?></dd>
             </dl>
             
