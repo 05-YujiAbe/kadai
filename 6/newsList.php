@@ -2,7 +2,7 @@
 
 $pdo = new PDO("mysql:host=localhost;dbname=cs_academy;charset=utf8", "root", "");
 
-if(isset($_GET["cat"])){
+if(isset($_GET["cat"]) && $_GET["cat"] != ""){
     $cat_id = $_GET['cat'];
     $sql = "SELECT * FROM news where news_cat = $cat_id ORDER BY news_id DESC LIMIT 10";
     $cat = "SELECT * FROM category where cat_id = $cat_id";
@@ -36,7 +36,19 @@ include "header.php";
     
         <h2 class="section-title text-center">
             <span class="section-title__yellow">News</span>
-            <?php if(isset($_GET["cat"])){ ?>
+            <form action="newsList.php" method="get" class="catChange">
+            <div class="customSelect">
+            <select name="cat" id="catSelect">
+                <option value="">ALL</option>
+                <option value="1">コラム</option>
+                <option value="2">ブログ</option>
+            </select>
+            <div class="selectBox"></div>
+
+            </div>
+            <input type="submit" value="変更">
+            </form>
+            <?php if(isset($_GET["cat"]) && $_GET["cat"] != ""){ ?>
             <span class="section-title-ja text-center"><?php echo $catresults[0]["cat_name"]; ?></span>
             <?php } ?>
         </h2>

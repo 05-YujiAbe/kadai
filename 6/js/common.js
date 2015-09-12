@@ -16,8 +16,16 @@ $(function(){
           });
         }
    });
-  scrollFadeIn();
+  // scrollFadeIn();
+  // $(document).on('change', '#catSelect', function() {
+  //   var catId = $(this).val();
+  //   $(".catChange").trigger('submit');
 
+  // });
+  // セレクト
+  $(".customSelect select").change(function() {
+      $(this).next().html($("option:selected", this).text());
+    }).trigger("change");
 });
 function gMap(){
     google.maps.event.addDomListener(window, 'load', function() {

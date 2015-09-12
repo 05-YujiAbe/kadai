@@ -35,11 +35,14 @@ title module
 }
 .section-title-ja{
     display: block;
-    margin-top:21px;
-    font-size:14px;
+    margin-top:20px;
+    font-size:16px;
+    color: #00a7ea;
 }
 .section-title__yellow{
     color:#ffd61a;
+    margin-bottom: 10px;
+    display: inline-block;
 }
 .section-title__white{
     color:#fff;

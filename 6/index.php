@@ -43,8 +43,7 @@ include "header.php";
                     <?php echo date('Y年n月j日', strtotime($value["create_date"]));
                     ?>
                     <span class="tagCat">
-                    <a href="newsList.php?cat=<?php echo $value["news_cat"]?>">
-                    <?php echo getCat($value["news_cat"]); ?></span></a>
+                    <?php echo getCat($value["news_cat"]); ?></span>
                     </dt>
                     <dd>
                         <a href="news.php?news_id=<?php echo $value["news_id"]?>"><?php echo letter($value["news_title"],10);?></a>
