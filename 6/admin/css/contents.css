@@ -19,6 +19,7 @@
     background-color: #fff;
     border-left: 4px solid #fff;
     position: relative;
+    display: none;
 }
 .msg a {
 	position: absolute;

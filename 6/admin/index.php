@@ -28,16 +28,10 @@ if($row["show_flg"] == 1){
 $view .= "</table>";
 
 include "header.php";
+include "sidebar.php";
 ?>
-<div id="menu">
-                <h2>メニュー</h2>
-                <ul>
-                	<li class="menu01 select"><a href="index.php">ニュース一覧</a></li>
-                    <li class="menu02"><a href="input.php">ニュース新規登録</a></li>
-                    <li class="menu03"><a href="category.php">カテゴリー情報</a></li>
-                </ul>    
-        <!--//main --></div>
-        <div id="menu-back"></div>
+
+       
         <div id="main">
         	<div class="body_cont">
              <div class="control">
