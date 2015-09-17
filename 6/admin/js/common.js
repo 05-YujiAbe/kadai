@@ -68,10 +68,22 @@ $(function(){
         countText.css('color', '#363636');
       }
     });
+    $(".fileUp input").click(function() {
+      $(this).on('change', function(event) {
+        file = event.target.files[0];
+        var imgA = new FileReader();
+        imgA.onload = function(e){
+          e.target.result;
+        };
+        imgA.readAsDataURL(file);
+
+      });
+    });
     setLayout();
     if($(".login").size() > 0){
       loginCheck();
     }
+
     
 });
 function loginCheck() {

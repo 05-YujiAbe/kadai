@@ -19,7 +19,6 @@
     background-color: #fff;
     border-left: 4px solid #fff;
     position: relative;
-    display: none;
 }
 .msg a {
 	position: absolute;
@@ -27,6 +26,9 @@
 }
 .msg-success {
 	border-color: #ffba00;
+}
+.msg-failed {
+	border-color: #ff3300;
 }
 
 .tbl
