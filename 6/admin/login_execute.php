@@ -1,8 +1,20 @@
 <?php
 $user = $_POST["user"];
 $password = $_POST["password"];
+
+$pdo = new PDO("mysql:host=localhost;dbname=cs_academy;charset=utf8", "root", "");
+$sql = "SELECT user_name,password FROM cs_user WHERE id = 1";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+foreach($results as $row) {
+    $db_user = $row["user_name"];
+    $db_password = $row["password"];
+}
+
+
 session_start();
-if($user == "admin" && $password == "password"){
+if($user == $db_user && $password == $db_password){
     $_SESSION["login"] = "login";
     header("Location: index.php");  
 }else{
