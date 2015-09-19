@@ -3,22 +3,27 @@ $user = $_POST["user"];
 $password = $_POST["password"];
 
 $pdo = new PDO("mysql:host=localhost;dbname=cs_academy;charset=utf8", "root", "");
-$sql = "SELECT user_name,password FROM cs_user WHERE id = 1";
+$sql = "SELECT user_name,password FROM cs_user WHERE user_name = :user";
 $stmt = $pdo->prepare($sql);
+$stmt->bindValue(':user', "$user", PDO::PARAM_STR);
 $stmt->execute();
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-foreach($results as $row) {
-    $db_user = $row["user_name"];
-    $db_password = $row["password"];
+if(count($results) > 0){
+    foreach($results as $row) {
+        $db_user = $row["user_name"];
+        $db_password = $row["password"];
+    }
+}else{
+    $db_user = "";
+    $db_password = "";
 }
-
 
 session_start();
 if($user == $db_user && $password == $db_password){
     $_SESSION["login"] = "login";
     header("Location: index.php");  
 }else{
-    header("Location: login.php");
+    header("Location: login.php?result=1");
 }
 ?>
 <!DOCTYPE html>

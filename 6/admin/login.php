@@ -41,10 +41,15 @@ session_destroy();
         <div class="login_area">
         	<div class="login_cont">
                 <form action="login_execute.php" method="post">
-                <p class="error">必須項目です</p>
             	<p class="mb20">ユーザー名：<br><input type="text" value="" name="user" class="req"></p>
-                <p class="error">必須項目です</p>
+                
                 <p class="mb20">パスワード：<br><input type="password" value="" name="password" class="req"></p>
+                <?php //if(isset($_GET["result"])) {
+                    if($_GET["result"] == 1) {
+                        echo "<p class='error'>ユーザー名かパスワードが間違っています。</p>";
+                    }
+                //} 
+                ?>
                 
                 <p class="mb10"><label><input type="checkbox" name="memory"> パスワードを保存する</label></p>
                 <p class="center"><input type="submit" value="ログイン" class="btnLogin"></p>

@@ -564,6 +564,5 @@ select
 	text-align: center;
 }
 .error {
-	display: none;
 	color: #f30;
 }
