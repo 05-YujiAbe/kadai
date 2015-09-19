@@ -1,7 +1,7 @@
 <?php 
 
 $pdo = new PDO("mysql:host=localhost;dbname=cs_academy;charset=utf8", "root", "");
-$sql = "SELECT * FROM news ORDER BY news_id DESC LIMIT 5";
+$sql = "SELECT * FROM news WHERE show_flg = 1 ORDER BY news_id DESC LIMIT 5";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);

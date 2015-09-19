@@ -5,8 +5,8 @@ $pdo = new PDO("mysql:host=localhost;dbname=cs_academy;charset=utf8", "root", ""
 if(count($_POST) > 0){
     //更新した場合
     $id = $_POST["id"];
-    $title = $_POST["title"];
-    $detail = $_POST["detail"];
+    $title = htmlspecialchars($_POST["title"], ENT_QUOTES, 'UTF-8');
+    $detail = htmlspecialchars($_POST["detail"], ENT_QUOTES, 'UTF-8');
     // $imgurl; //画像のパス
     $cat = $_POST["category"]; //カテゴリー
     $showFlg = $_POST["show"]; //表示非表示
@@ -14,9 +14,9 @@ if(count($_POST) > 0){
     $sql = "UPDATE news set news_title = '" . $title . "', news_detail = '" . $detail . "', show_flg = " . $showFlg . ", news_cat = " . $cat . ", create_date = CAST('" .  $create_date . "' AS DATETIME ), update_date = sysdate() " . "WHERE news_id = " . $id;
     $stmt = $pdo->prepare($sql);
     $result = $stmt->execute();
-    header("Location: update.php?id=".$id."&result=".$result);  
+    header("Location: update.php?id=".$id."&result=".$result);
 }else{
-    //一覧からリンクしてきた時
+    //新規作成、一覧からリンクしてきた時
 
     $id = $_GET["id"];
     $title; //タイトル
@@ -34,7 +34,7 @@ if(count($_POST) > 0){
     foreach($results as $row) {
 
         $title = $row["news_title"];
-        $detail = $row["news_detail"];
+        $detail = nl2br(htmlspecialchars_decode($row["news_detail"]));
         $imgurl = $row["news_url"];
         $cat = $row["news_cat"];
         $showFlg = $row["show_flg"];
@@ -90,7 +90,7 @@ include "sidebar.php";
                             <h4>カテゴリー</h4>
                             <div class="inside">
                                 <select name="category" id="">
-                                    <option value="<?php echo $cat;?>"><?php echo $cat;?></option>
+                                    <option value="1"><?php echo $cat;?></option>
                                 </select>
                             </div>
                         </div>
