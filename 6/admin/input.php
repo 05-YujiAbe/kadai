@@ -1,10 +1,10 @@
 <?php
 include "session.php";
 
-
+$pdo = new PDO("mysql:host=localhost;dbname=cs_academy;charset=utf8", "root", "");
 if(count($_POST) > 0){
     //送信した場合
-    $pdo = new PDO("mysql:host=localhost;dbname=cs_academy;charset=utf8", "root", "");
+    
     
     $title = htmlspecialchars($_POST["title"], ENT_QUOTES, 'UTF-8');
     $detail = htmlspecialchars($_POST["detail"], ENT_QUOTES, 'UTF-8');
@@ -15,13 +15,14 @@ if(count($_POST) > 0){
     $sql = "INSERT INTO news (news_id, news_title, news_detail, show_flg, news_cat, create_date, update_date) VALUES (NULL, '" . $title . "', '" . $detail . "', " . $showFlg . ", " . $cat . ", sysdate(), sysdate()) ";
     $stmt = $pdo->prepare($sql);
     $result = $stmt->execute();
-    $pdo = null;
+    
     //一覧へ
     header("Location: index.php");
     // そのまま編集画面へ
     // header("Location: update.php?id=".$id."&result=".$result);
 }
-
+include "dbcategory.php";
+$pdo = null;
 
 include "header.php";
 include "sidebar.php";
@@ -59,8 +60,11 @@ include "sidebar.php";
                             <h4>カテゴリー</h4>
                             <div class="inside">
                                 <select name="category" id="">
-                                    <option value="1">1</option>
-                                    <option value="1">2</option>
+                                    <?php
+                                    foreach($catArray as $catrow) {
+                                            echo '<option value="'.$catrow["cat_id"].'">'.$catrow["cat_name"].'</option>';
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>

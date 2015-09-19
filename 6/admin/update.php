@@ -1,6 +1,7 @@
 <?php
 include "session.php";
 $pdo = new PDO("mysql:host=localhost;dbname=cs_academy;charset=utf8", "root", "");
+include "dbcategory.php"; //$catArrayを設定
 
 if(count($_POST) > 0){
     //更新した場合
@@ -26,7 +27,7 @@ if(count($_POST) > 0){
     $showFlg; //表示非表示
     $create_date; //登録日
     $update_date; //更新日
-    $sql = "SELECT news_id,news_title,news_detail,news_url,show_flg,news_cat,create_date,update_date FROM news WHERE news_id = :id";
+    $sql = "SELECT news_id,news_title,news_detail,news_url,show_flg,category.cat_name,create_date,update_date FROM news,category WHERE category.cat_id = news.news_cat AND news_id = :id";
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
@@ -36,7 +37,7 @@ if(count($_POST) > 0){
         $title = $row["news_title"];
         $detail = nl2br(htmlspecialchars_decode($row["news_detail"]));
         $imgurl = $row["news_url"];
-        $cat = $row["news_cat"];
+        $cat = $row["cat_name"];
         $showFlg = $row["show_flg"];
         $create_date = $row["create_date"];
         $update_date = $row["update_date"];
@@ -90,7 +91,16 @@ include "sidebar.php";
                             <h4>カテゴリー</h4>
                             <div class="inside">
                                 <select name="category" id="">
-                                    <option value="1"><?php echo $cat;?></option>
+                                    <?php
+                                    foreach($catArray as $catrow) {
+                                        if($cat == $catrow["cat_name"]){
+                                            echo '<option value="'.$catrow["cat_id"].'" selected>'.$catrow["cat_name"].'</option>';
+                                        }else{
+                                            echo '<option value="'.$catrow["cat_id"].'">'.$catrow["cat_name"].'</option>';
+                                        }
+                                       
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>

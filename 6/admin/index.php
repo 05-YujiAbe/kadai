@@ -7,13 +7,14 @@ if(count($_GET) > 0){
 	//検索した時
 	$s_title = $_GET["title"];
 	$s_detail = $_GET["detail"];
-	$sql = "SELECT news_id,news_title,news_detail,show_flg,news_cat,DATE_FORMAT(create_date , '%Y.%m.%d') AS create_date,DATE_FORMAT(update_date , '%Y.%m.%d') AS update_date FROM news WHERE news_title LIKE :title AND news_detail LIKE :detail";
+	$sql = "SELECT news_id,news_title,news_detail,show_flg,category.cat_name,DATE_FORMAT(create_date , '%Y.%m.%d') AS create_date,DATE_FORMAT(update_date , '%Y.%m.%d') AS update_date FROM news,category WHERE category.cat_id = news.news_cat AND news_title LIKE :title AND news_detail LIKE :detail";
 	$stmt = $pdo->prepare($sql);
 	$stmt->bindValue(':title', "%$s_title%", PDO::PARAM_STR);
 	$stmt->bindValue(':detail', "%$s_detail%", PDO::PARAM_STR);
 }else{
 //通常の一覧ページ
-	$sql = "SELECT news_id,news_title,show_flg,news_cat,DATE_FORMAT(create_date , '%Y.%m.%d') AS create_date,DATE_FORMAT(update_date , '%Y.%m.%d') AS update_date FROM news";
+	$sql = "SELECT news.news_id,news.news_title,news.show_flg,category.cat_name,DATE_FORMAT(create_date , '%Y.%m.%d') AS create_date,DATE_FORMAT(update_date , '%Y.%m.%d') AS update_date FROM news,category WHERE category.cat_id = news.news_cat";
+	//category.cat_name
 	$stmt = $pdo->prepare($sql);
 }
 
@@ -33,7 +34,7 @@ foreach($results as $row) {
 	$view .= "<td class='wd5'><input type='checkbox' name='check".$row["news_id"]."' class='check'></td>";
 	$view .= "<td class='wd5'><a href='update.php?id=" .$row["news_id"]. "'>" .$row["news_id"]. "</a></td>";
 	$view .= "<td class='wd25'><a href='update.php?id=" .$row["news_id"]. "'>".$row["news_title"]."</a></td>";
-	$view .= "<td class='wd10'>" .$row["news_cat"]. "</td><td class='wd15'>" .$row["create_date"]. "</td>";
+	$view .= "<td class='wd10'>" .$row["cat_name"]. "</td><td class='wd15'>" .$row["create_date"]. "</td>";
 	$view .= "<td class='wd15'>" .$row["update_date"]. "</td><td class='wd15'>" . $showFlg . "</td>";
 	$view .= "</tr>";
 
