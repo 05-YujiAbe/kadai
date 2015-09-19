@@ -2,19 +2,33 @@
 include "session.php";
 
 $pdo = new PDO("mysql:host=localhost;dbname=cs_academy;charset=utf8", "root", "");
-$sql = "SELECT news_id,news_title,show_flg,news_cat,DATE_FORMAT(create_date , '%Y.%m.%d') AS create_date,DATE_FORMAT(update_date , '%Y.%m.%d') AS update_date FROM news";
-$stmt = $pdo->prepare($sql);
+
+if(count($_GET) > 0){
+	//検索した時
+	$s_title = $_GET["title"];
+	$s_detail = $_GET["detail"];
+	$sql = "SELECT news_id,news_title,news_detail,show_flg,news_cat,DATE_FORMAT(create_date , '%Y.%m.%d') AS create_date,DATE_FORMAT(update_date , '%Y.%m.%d') AS update_date FROM news WHERE news_title LIKE :title AND news_detail LIKE :detail";
+	$stmt = $pdo->prepare($sql);
+	$stmt->bindValue(':title', "%$s_title%", PDO::PARAM_STR);
+	$stmt->bindValue(':detail', "%$s_detail%", PDO::PARAM_STR);
+}else{
+//通常の一覧ページ
+	$sql = "SELECT news_id,news_title,show_flg,news_cat,DATE_FORMAT(create_date , '%Y.%m.%d') AS create_date,DATE_FORMAT(update_date , '%Y.%m.%d') AS update_date FROM news";
+	$stmt = $pdo->prepare($sql);
+}
+
 $stmt->execute();
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $view = "";
 $view .= "<table>";
+
 foreach($results as $row) {
-if($row["show_flg"] == 1){
-	$showFlg = "<span class='now'>掲載中</span>";
-}else{
-	$showFlg = "<span>非掲載</span>";
-}
-//	var_dump($row);
+	if($row["show_flg"] == 1){
+		$showFlg = "<span class='now'>掲載中</span>";
+	}else{
+		$showFlg = "<span>非掲載</span>";
+	}
+	//	var_dump($row);
 	$view .= "<tr>";
 	$view .= "<td class='wd5'><input type='checkbox' name='check".$row["news_id"]."' class='check'></td>";
 	$view .= "<td class='wd5'><a href='update.php?id=" .$row["news_id"]. "'>" .$row["news_id"]. "</a></td>";
@@ -27,6 +41,8 @@ if($row["show_flg"] == 1){
 // table閉じタグで終了
 $view .= "</table>";
 
+
+$pdo = null;
 include "header.php";
 include "sidebar.php";
 ?>
@@ -47,8 +63,8 @@ include "sidebar.php";
              </div>
              <div class="search_area">
                 <form action="index.php" name="get">
-             	  <span>タイトル <input type="text" name="title"></span><span>本文 <input type="text" name="honbun"></span>
-                    <input type="submit" name="search" value="検索">
+             	  <span>タイトル <input type="text" name="title"></span><span>本文 <input type="text" name="detail"></span>
+                    <input type="submit" value="検索">
                 </form>
              </div>
              <div class="list">
