@@ -24,7 +24,7 @@ foreach($results as $key => $row) {
     //  var_dump($row);
     if($key < 3){
         $viewMain .= "<li><a href='single.php?news_id=" .$row["news_id"]. "'><dl><dt>";
-        $viewMain .= "<img src='images/" .$row["news_url"]. "' alt=''></dt><dd><div class='sub'>";
+        $viewMain .= "<img src='admin/files/" .$row["news_url"]. "' alt=''></dt><dd><div class='sub'>";
         $viewMain .= "<span class='catIcon " .$row["cat_slug"]. "'>" .$row["cat_name"]. "</span>";
         $viewMain .= "<span class='date'>" .$row["create_date"]. "</span></div>";
         $viewMain .= "<h2>" .$row["news_title"]. "</h2>";
@@ -33,7 +33,7 @@ foreach($results as $key => $row) {
     }else{
         $view .= "<li><a href='single.php?news_id=" .$row["news_id"]. "'>";
         $view .= "<span class='catIcon " .$row["cat_slug"]. "'>" .$row["cat_name"]. "</span>";
-        $view .=  "<figure><img src='images/" .$row["news_url"]. "' alt=''></figure>";
+        $view .=  "<figure><img src='admin/files/" .$row["news_url"]. "' alt=''></figure>";
         $view .= "<div class='itemContent'><p class='title'>" .$row["news_title"]. "</p>";
         $view .= "<p class='date'>" .$row["create_date"]. "</p></div></a></li>";
     }
@@ -60,7 +60,7 @@ include "header.php";
             <ul class="itemList heightAlign">
                 <?php echo $view; ?>
             </ul>
-            <p class="moreLink"><a href="">&raquo; MORE</a></p>
+            <p class="moreLink"><a href="archive.php">&raquo; MORE</a></p>
         </section>
 
             	

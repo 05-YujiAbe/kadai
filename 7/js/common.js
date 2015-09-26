@@ -8,6 +8,9 @@ $(function(){
 	}
 	heightAlign();
 	checkBrowser();
+	$(document).on("change", ".searchNum", function () {
+    document.pageNumChange.submit();
+ });
 });
 //クリックでスライドダウン
 function menuDown(){
@@ -135,6 +138,7 @@ function ancSubmit(){
 		$(this).parents("form").submit();
 	});
 }
+
 //マウスオーバーで画像を変更
 function mHoverImg(){
      $('a img').hover(function(){

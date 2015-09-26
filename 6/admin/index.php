@@ -127,7 +127,7 @@ include "sidebar.php";
                     <input value="実行" name="action" class="action" type="submit" onClick="allControl();">
                 </div>
                 <p class="search_btn"><i class="fa fa-search"></i></p>
-                <form action="index.php" name="pageNumChange" method="post" class="pageNumChange">
+                <form action="<?php echo $_SERVER["REQUEST_URI"];?>" name="pageNumChange" method="post" class="pageNumChange">
                 	表示数
                 	<select name="pageNum" id="" class="pageNum">
                 		<option value="2" <?php if(PER_PAGE==2) echo 'selected';?> >2</option>
