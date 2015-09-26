@@ -71,7 +71,7 @@ include "sidebar.php";
                     <a href="index.php">&laquo; 一覧へ戻る</a>
                 </div>
                 <div class="editName">
-                    <p><a href="/0927/news.php?news_id=<?php echo $id; ?>" target="_blank">このページを見る</a></p>
+                    <p><a href="../single.php?news_id=<?php echo $id; ?>" target="_blank">このページを見る</a></p>
                 </div>
              </div>
              
