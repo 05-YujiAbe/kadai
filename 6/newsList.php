@@ -56,7 +56,7 @@ include "header.php";
         <?php foreach($results as $key => $value){ ?>
         <li><a href='<?php echo linkMake($value["news_id"]);?>'>
             <dl class="clearfix">
-                <dt><img src="<?php echo $value["news_url"];?>" alt=""></dt>
+                <dt><img src="admin/files/<?php echo $value["news_url"];?>" alt=""></dt>
                 <dd class="sub"><span class="date"><?php echo date('Y.n.j.', strtotime($value["create_date"]));
                     ?></span>
                     <span class="cat">

@@ -1,0 +1,117 @@
+@media screen and (max-width: 1000px)    {
+   .head_cont
+    {
+        padding: 10px 2%;
+    }
+    #nav {
+        padding: 0 1%;
+    }
+    .foot {
+        padding: 0 1%;
+    }
+}
+@media screen and (max-width: 768px)    {
+    #header h1
+    {
+        float: none;
+        text-align: center;
+        margin-bottom: 2%;
+    }
+    #nav #gNavi ul {
+        float: none;
+        width: 100%;
+    }
+    #nav #gNavi li {
+        height: 40px;
+    }
+    .search {
+        float: none;
+        width: 100%;
+        background-color: #fff;
+        height: 30px;
+        margin-top: 10px;
+    }
+    .itemList li,
+    .recommendArea .itemList li {
+        width: 33.3333%;
+    }
+    .pankuzu {
+        padding: 0 1%;    
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+        width: auto\9; /* ie8 */
+    }
+    #main > section {
+        padding: 0 1%;
+    }
+    /******************
+    詳細ページ
+    ******************/
+    #main > article {
+        margin: 0 2% 2%;
+    }
+    #main > article h2,
+    .itemWrap{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .itemInfo {
+      width: 100%;
+      float: none;
+    }
+    .photoArea {
+        width: 100%;
+        float: none;
+        margin-right: 0;
+    }
+    .optionContent ul li figure {
+        float: right;
+        width: 30%;
+        margin-left: 10px;
+    }
+    .optionDetail {
+        margin-right: 0;
+    }
+    .rateArea {
+        float: none;
+        width: 100%;
+        margin-bottom: 2%;
+    }
+    .rateRank {
+        font-weight: bold;
+    }
+    .rateText {
+        margin-left: 0;
+    }
+    .rateText p {
+        font-size: 0.857em;
+    }
+    .reviewWriteForm dl{
+        width: 100%;
+    }
+    .reviewWriteForm dt {
+        float: none;
+        background-color: #eee;
+        padding: 1%;
+    }
+    .reviewWriteForm dd {
+        padding-left: 0;
+        border-top: none;
+    }
+    
+}
+ 
+@media screen and (max-width: 480px) {
+    .itemList li,
+    .recommendArea .itemList li {
+        width: 50%;
+    }
+	.video embed,
+	.video object,
+	.video iframe {
+        width: 100%;
+        height: auto;
+	}
+}

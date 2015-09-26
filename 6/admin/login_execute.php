@@ -2,7 +2,7 @@
 $user = $_POST["user"];
 $password = $_POST["password"];
 
-$pdo = new PDO("mysql:host=localhost;dbname=cs_academy;charset=utf8", "root", "");
+include "config.php";
 $sql = "SELECT user_name,password FROM cs_user WHERE user_name = :user";
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':user', "$user", PDO::PARAM_STR);

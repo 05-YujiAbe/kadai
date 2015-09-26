@@ -1,0 +1,159 @@
+.archiveControl,
+.pankuzu,
+#main > article > div,
+#main > article > figure{
+	margin-left: 0.98%;
+	margin-right: 0.98%;
+}
+.pankuzu,
+#main > article {
+	margin-bottom: 2%;
+}
+
+
+/******************
+一覧ページ
+******************/
+
+.archiveControl {
+	background-color: #fff;
+	margin-bottom: 2%;
+	padding: 1.5% 2%;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.displayArea:after {
+	content:"";
+	clear: both;
+	display: table;
+}
+.displayArea {
+	padding-bottom: 1%;
+	margin-bottom: 1.5%;
+	border-bottom: 1px solid #e8e8e8;
+}
+
+.displayDesc {
+	float: left;
+}
+.displayDesc span {
+	font-size: 1.5em;
+}
+.displayVol {
+	float: right;
+}
+.displayVol select {
+	margin-left: 5px;
+}
+.pager {
+	
+}
+.pager ul {
+	text-align: right;
+}
+.pager ul li {
+	display: inline-block;
+	margin: 0 1px;
+}
+.pager ul li span,
+.pager ul li a {
+	font-size: 1.3rem;
+	font-weight: normal;
+	background: #f8f8f8 none repeat scroll 0 0;
+    border: 1px solid #d3d3d3;
+    color: #333;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+    display: inline-block;
+    height: 28px;
+    padding: 0 10px;
+    line-height: normal;
+    -webkit-border-radius: 2px;
+            border-radius: 2px;
+    vertical-align: middle;
+    line-height: 26px;
+}
+.pager ul li span {
+	background: #e9e9e9;
+	border-color: #c6c6c6;
+}
+.pager ul li a:hover {
+	background-color: #f0f0f0;
+	border-color: #c6c6c6;
+}
+
+.pager ul li a {
+	font-weight: bold;
+}
+
+/******************
+詳細ページ
+******************/
+
+.articleArea {
+	position: relative;
+	background-color: #fff;
+	margin: 0 0.98% 2%;
+	padding: 3%;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.articleArea figure img{
+	max-width: 100%;
+	height: auto;
+}
+#main .articleArea > div,
+#main .articleArea > h2,
+#main .articleArea > figure{
+	margin-left: 0;
+	margin-right: 0;
+}
+#main .articleArea > figure {
+	margin-bottom: 2%;
+}
+#main .articleArea > h2 {
+	font-size: 2rem;
+    background-color: #fff;
+    padding: 0;
+    line-height: 180%;
+    color: #333;
+    margin-bottom: 2%;
+}
+.articleArea .catIcon {
+	position: relative;
+}
+.artInfo {
+	display: table;
+	width: 100%;
+	margin-bottom: 2%;
+}
+.artInfo:after,
+.social:after {
+	clear: both;
+	content:"";
+	display: table;
+}
+.social {
+	text-align: center;
+}
+.social > div {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 1%;	
+}
+
+.artInfo > div {
+	display: table-cell;
+}
+.artInfo div.txtR {
+	text-align: right;
+}
+.artContents {
+	font-size: 1.4rem;
+	padding-bottom: 2%;
+	border-bottom: 1px solid #e8e8e8;
+	margin-bottom: 2%;	
+}
+
+.artInfo .date {
+	font-size: 1.6rem;
+}

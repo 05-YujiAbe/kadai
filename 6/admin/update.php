@@ -1,6 +1,6 @@
 <?php
 include "session.php";
-$pdo = new PDO("mysql:host=localhost;dbname=cs_academy;charset=utf8", "root", "");
+include "config.php";
 include "dbcategory.php"; //$catArrayを設定
 
 if(count($_POST) > 0){
@@ -8,11 +8,20 @@ if(count($_POST) > 0){
     $id = $_POST["id"];
     $title = htmlspecialchars($_POST["title"], ENT_QUOTES, 'UTF-8');
     $detail = htmlspecialchars($_POST["detail"], ENT_QUOTES, 'UTF-8');
-    // $imgurl; //画像のパス
+    // 画像登録
+    $imgurl = $_FILES["img"];
+    if($imgurl["name"]){
+        include "upload.php";
+        $imgPath = $_FILES["img"]['name'];
+    }else{
+        $imgPath = $_POST["imgPath"];
+    }
+    
     $cat = $_POST["category"]; //カテゴリー
     $showFlg = $_POST["show"]; //表示非表示
     $create_date = $_POST["create_date"]; //登録日
-    $sql = "UPDATE news set news_title = '" . $title . "', news_detail = '" . $detail . "', show_flg = " . $showFlg . ", news_cat = " . $cat . ", create_date = CAST('" .  $create_date . "' AS DATETIME ), update_date = sysdate() " . "WHERE news_id = " . $id;
+    $sql = "UPDATE news set news_title = '" . $title . "', news_detail = '" . $detail . "', show_flg = " . $showFlg . ", news_url = '" . $imgPath . "', news_cat = " . $cat . ",  create_date = CAST('" .  $create_date . "' AS DATETIME ), update_date = sysdate() " . "WHERE news_id = " . $id;
+    
     $stmt = $pdo->prepare($sql);
     $result = $stmt->execute();
     header("Location: update.php?id=".$id."&result=".$result);
@@ -73,7 +82,7 @@ include "sidebar.php";
                 ?>
                 <h3>記事の編集</h3>
                  <div class="edit_area">
-                    <form action="update.php" method="post">
+                    <form action="update.php" method="post" enctype="multipart/form-data">
                     <div class="contentSub">
                         <p class="lastUpdate">最終更新日:<?php echo $update_date; ?></p>
                         <div class="postbox">
@@ -108,6 +117,15 @@ include "sidebar.php";
                             <h4>アイキャッチ画像</h4>
                             <div class="inside">
                                 <input type="file" accept='image/*' name="img">
+                                <input type="hidden" value="<?php echo $imgurl;?>" name="imgPath">
+                                <?php
+                                    if(isset($imgurl)){
+                                        if($imgurl) {
+                                            echo "<figure><img src='files/" . $imgurl . "' alt=''></figure>";
+                                        }
+                                    }
+                                ?>
+                                
                                 <!-- <a href="">画像を設定</a> -->
                             </div>
                         </div>
