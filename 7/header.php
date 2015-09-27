@@ -1,3 +1,10 @@
+<?php
+    if(isset($_GET["cat_id"])){
+        $nowCat = $_GET["cat_id"];
+    }else{
+        $nowCat = "";
+    }
+?>
 <!DOCTYPE html>
 <!--[if IE 7]>
 <html class="ie ie7" lang="ja">
@@ -41,15 +48,16 @@
    
     <nav id="nav" class="cf">
         <div id="gNavi">
-            <ul><li class="navi01"><a href="archive.php?cat_id=1">遊ぶ
-            </a></li><li class="navi02"><a href="archive.php?cat_id=2">観る
-            </a></li><li class="navi03"><a href="archive.php?cat_id=5">体験
-            </a></li><li class="navi04"><a href="archive.php?cat_id=7">食べる
-            </a></li><li class="navi05"><a href="archive.php?cat_id=8">文化
-            </a></li><li class="navi06"><a href="archive.php?cat_id=9">買う
-            </a></li><li class="navi07"><a href="archive.php?cat_id=10">泊まる
+            <ul><li class="navi01 <?php if($nowCat == 1) echo 'select';?>"><a href="archive.php?cat_id=1">遊ぶ
+            </a></li><li class="navi02 <?php if($nowCat == 2) echo 'select';?>"><a href="archive.php?cat_id=2">観る
+            </a></li><li class="navi03 <?php if($nowCat == 5) echo 'select';?>"><a href="archive.php?cat_id=5">体験
+            </a></li><li class="navi04 <?php if($nowCat == 7) echo 'select';?>"><a href="archive.php?cat_id=7">食べる
+            </a></li><li class="navi05 <?php if($nowCat == 8) echo 'select';?>"><a href="archive.php?cat_id=8">文化
+            </a></li><li class="navi06 <?php if($nowCat == 9) echo 'select';?>"><a href="archive.php?cat_id=9">買う
+            </a></li><li class="navi07 <?php if($nowCat == 10) echo 'select';?>"><a href="archive.php?cat_id=10">泊まる
             </a></li></ul>
-            <div class="search"><form action="archive.php" method="get" name="search"><input type="text" name="s"><a href="" class="submit"><i class="fa fa-search"></i></a></form></div>
+            <div class="search"><form action="archive.php" method="get" name="search">
+            <input type="text" name="s" value="<?php if(isset($_GET['s'])) echo $_GET['s'];?>"><a href="" class="submit"><i class="fa fa-search"></i></a></form></div>
         <!-- /#gNavi --></div>
     </nav>
 <!--//header --></header>

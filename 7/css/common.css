@@ -85,29 +85,37 @@ a:hover {
 	line-height: 50px;
 	font-size: 1.166em;
 }
-#nav #gNavi li a:hover {
+#nav #gNavi li a:hover,
+#nav #gNavi li.select a {
 	text-decoration: none;
 	color: #fff;
 }
-#nav #gNavi li.navi01 a:hover {
+#nav #gNavi li.navi01 a:hover,
+#nav #gNavi li.navi01.select a {
 	background-color: #f39c12;
 }
-#nav #gNavi li.navi02 a:hover {
+#nav #gNavi li.navi02 a:hover,
+#nav #gNavi li.navi02.select a {
 	background-color: #e85445;
 }
-#nav #gNavi li.navi03 a:hover {
+#nav #gNavi li.navi03 a:hover,
+#nav #gNavi li.navi03.select a {
 	background-color: #3498db;
 }
-#nav #gNavi li.navi04 a:hover {
+#nav #gNavi li.navi04 a:hover,
+#nav #gNavi li.navi04.select a {
 	background-color: #2ecc71;
 }
-#nav #gNavi li.navi05 a:hover {
+#nav #gNavi li.navi05 a:hover,
+#nav #gNavi li.navi05.select a {
 	background-color: #9b59b6;
 }
-#nav #gNavi li.navi06 a:hover {
+#nav #gNavi li.navi06 a:hover,
+#nav #gNavi li.navi06.select a {
 	background-color: #F27398;
 }
-#nav #gNavi li.navi07 a:hover {
+#nav #gNavi li.navi07 a:hover,
+#nav #gNavi li.navi07.select a {
 	background-color: #34495e;
 }
 .search {
@@ -188,6 +196,11 @@ a:hover {
 	margin: 0 auto;
 	padding: 2% 0;
 	position: relative;
+}
+#contents:after {
+	content: "";
+	display: table;
+	clear: both;
 }
 .moreLink,
 #mainVisual,
@@ -326,10 +339,8 @@ a:hover {
 	font-size: 1.4rem;
 }
 #side{
-	position: absolute;
+	float: right;
 	width: 25%;
-	right: 0;
-	top: inherit;
 }
 #side h2 {
 	padding: 8px 10px;

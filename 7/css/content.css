@@ -24,7 +24,7 @@
 
 .displayArea:after {
 	content:"";
-	clear: both;
+	clear: left;
 	display: table;
 }
 .displayArea {
