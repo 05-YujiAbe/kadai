@@ -218,8 +218,14 @@
 	display: inline-block;
 }
 .postbox .inside input[type=file]{
-	display: inline-block;
-	margin-bottom: 5px;
+	opacity: 0;
+	visibility: hidden;
+	height: 0;
+}
+.fileupImg {
+	cursor: pointer;
+	color: #00A3BA;
+	text-decoration: underline;	
 }
 .postbox .inside figure {
 	width: 100%;

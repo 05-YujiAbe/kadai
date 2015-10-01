@@ -9,8 +9,8 @@ $(function(){
 	heightAlign();
 	checkBrowser();
 	$(document).on("change", ".searchNum", function () {
-    document.pageNumChange.submit();
- });
+	    document.pageNumChange.submit();
+	 });
 });
 //クリックでスライドダウン
 function menuDown(){

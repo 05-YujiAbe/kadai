@@ -1,65 +1,46 @@
 <?php
 include "session.php";
 include "config.php";
+include "function.php";
+
 // SQLのselect部分
 $sqlSelect = "news_id,news_title,news_detail,show_flg,category.cat_name,DATE_FORMAT(create_date , '%Y.%m.%d') AS create_date,DATE_FORMAT(update_date , '%Y.%m.%d') AS update_date";
 // SQLのFrom部分
 $sqlFrom = "news,category";
-//ページ位置の設定
-$page = 1;
-if (isset($_GET['page'])) {
-	$page = intval($_GET['page']);
-}
-$offset = PER_PAGE * ($page - 1);
-
+// SQLのページング部分
 
 // -------- カテゴリー一覧からのリンク
 if(isset($_GET["category_id"])){
 		$cat_id = $_GET["category_id"];
 		// SQLのWHEREの箇所の設定--
 		$sqlWHERE = " WHERE category.cat_id = news.news_cat AND news.news_cat = ".$cat_id;
-		// SQL文の接合
-		$sql = "SELECT ". $sqlSelect ." FROM ". $sqlFrom ." ".$sqlWHERE." LIMIT ".$offset.",". PER_PAGE;
+		// $sql = "SELECT ". $sqlSelect ." FROM ". $sqlFrom ." ".$sqlWHERE.$sqlPerPageE;
 
 		//記事総数を取得
-		$total = $pdo->query("SELECT count(*) FROM ". $sqlFrom ." ".$sqlWHERE)->fetchColumn();
-		
-		$stmt = $pdo->prepare($sql);
+		$total = sqlRequest("count(*)",$sqlFrom,$sqlWHERE);
 
 }else if(isset($_GET["title"])){
 	// -------- 検索した時
 	$s_title = $_GET["title"];
 	$s_detail = $_GET["detail"];
 	$sqlWHERE = "  WHERE category.cat_id = news.news_cat AND news_title LIKE :title AND news_detail LIKE :detail";
-	$sql = "SELECT ". $sqlSelect ." FROM ". $sqlFrom ." ".$sqlWHERE." LIMIT ".$offset.",". PER_PAGE;
 	//記事総数を取得
-	$sqlPage = "SELECT count(*) FROM ". $sqlFrom ." ".$sqlWHERE; 
-	$stmt = $pdo->prepare($sql);
-	$stmt2 = $pdo->prepare($sqlPage);
-	$stmt->bindValue(':title', "%$s_title%", PDO::PARAM_STR);
-	$stmt->bindValue(':detail', "%$s_detail%", PDO::PARAM_STR);
-	$stmt2->bindValue(':title', "%$s_title%", PDO::PARAM_STR);
-	$stmt2->bindValue(':detail', "%$s_detail%", PDO::PARAM_STR);
-	//記事総数を取得
-	$stmt2->execute();
-	$total = $stmt2->fetchColumn();
 
+	//$sqlPage = "SELECT count(*) FROM ". $sqlFrom ." ".$sqlWHERE;
+	$bindArray = array(array('bind' => ':title', 'value' => "%$s_title%", 'param' => PDO::PARAM_STR),array('bind' => ':detail', 'value' => "%$s_detail%", 'param' => PDO::PARAM_STR));
+	//記事総数を取得
+	$total = sqlRequest("count(*)",$sqlFrom,$sqlWHERE,null,$bindArray);
 
 } else {
-	
 	//通常の一覧ページ
 	$sqlWHERE = " WHERE category.cat_id = news.news_cat";
-	$sql = "SELECT ". $sqlSelect ." FROM ". $sqlFrom ." ".$sqlWHERE." LIMIT ".$offset.",". PER_PAGE;
-
 	//記事総数を取得
-	$total = $pdo->query("SELECT count(*) FROM news")->fetchColumn();
+	$total = sqlRequest("count(*)","news");
 	
-	//category.cat_name
-	$stmt = $pdo->prepare($sql);
 }
 // SQLの実行
-$stmt->execute();
-$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$results = sqlRequest($sqlSelect,$sqlFrom,$sqlWHERE,$sqlPerPage,$bindArray);
+$catArray = sqlRequest("*","category");
 
 $view = "";
 $view .= "<table>";
@@ -84,29 +65,7 @@ foreach($results as $row) {
 $view .= "</table>";
 
 // ******* ページの表示設定ここから ********
-$totalPages = ceil($total / PER_PAGE);
-$pager = "";
-$pageLink = ""; // ページャ以外のGET
-//ページャーの生成
-$pager .= '<p class="pager">';
-// ページャ以外のGETをリンクに
-if (isset($_GET)) {
-	foreach ($_GET as $key => $value) {
-		if($key == "page"){
-			continue;
-		}
-		$pageLink .= "&".$key."=".$value;
-	}
-}
-for ($i=1; $i <= $totalPages; $i++) {
-	if($page == $i){
-		$pager .= "<span>".$i."</span>";
-	}else{
-		$pager .= "<a href='?page=".$i.$pageLink."'>".$i."</a>";
-	}
-	
-}
-$pager .= '</p>';
+$pager = pagerMake($total);
 // ******* ページの表示設定ここまで ******* 
 
 $pdo = null;

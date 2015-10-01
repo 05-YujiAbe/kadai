@@ -138,7 +138,7 @@ body
 #menu ul li a
 {
 	display: block;
-	padding: 12px 0 13px 15px;
+	padding: 14px 0 15px 15px;
 	text-decoration: none;
 	color: #6a6e71;
 }
@@ -292,7 +292,7 @@ body
 }
 .list table td
 {
-	padding: 1.2% 1%;
+	padding: 1.5% 1%;
 }
 .wd5{ width: 5%;}
 .wd10{ width: 10%;}
@@ -493,6 +493,10 @@ select
 	text-align: right;
 	position: relative;
 }
+.pager ul li {
+	display: inline-block;
+	margin-right: 3px;
+}
 .page a
 {
 	-webkit-border-radius: 3px 3px 3px 3px;
@@ -585,3 +589,4 @@ i.icon{
 .icon.iUser:before {
   content: "\f007";
 }
+

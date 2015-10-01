@@ -1,15 +1,18 @@
 <?php
 include "session.php";
 include "config.php";
-include "dbcategory.php"; //$catArrayを設定
+include "function.php"; 
+
+$catArray = sqlRequest("*","category");//$catArrayを設定
 
 if(count($_POST) > 0){
     //更新した場合
     $id = $_POST["id"];
-    $title = htmlspecialchars($_POST["title"], ENT_QUOTES, 'UTF-8');
-    $detail = htmlspecialchars($_POST["detail"], ENT_QUOTES, 'UTF-8');
+    $title = hs($_POST["title"]);
+    $detail = hs($_POST["detail"]);
     // 画像登録
     $imgurl = $_FILES["img"];
+    // 画像が新しくUPされていればそれを、そうでない場合は元々入っていた画像を保存
     if($imgurl["name"]){
         include "upload.php";
         $imgPath = $_FILES["img"]['name'];
@@ -116,12 +119,13 @@ include "sidebar.php";
                         <div class="postbox">
                             <h4>アイキャッチ画像</h4>
                             <div class="inside">
+                                <span class="fileupImg">画像をアップロードする</span>
                                 <input type="file" accept='image/*' name="img">
                                 <input type="hidden" value="<?php echo $imgurl;?>" name="imgPath">
                                 <?php
                                     if(isset($imgurl)){
                                         if($imgurl) {
-                                            echo "<figure><img src='files/" . $imgurl . "' alt=''></figure>";
+                                            echo "<figure><img src='files/" . $imgurl . "' class='thumbImg'></figure>";
                                         }
                                     }
                                 ?>

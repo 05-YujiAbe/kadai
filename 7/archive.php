@@ -1,16 +1,12 @@
 <?php 
-include "config.php";
+require "admin/config.php";
+include "admin/function.php";
 
 // SQLのselect部分
 $sqlSelect = "news_id,news_title,news_detail,news_url,show_flg,category.cat_name,category.cat_slug,DATE_FORMAT(create_date , '%Y.%m.%d') AS create_date,DATE_FORMAT(update_date , '%Y.%m.%d') AS update_date";
 // SQLのFrom部分
 $sqlFrom = "news,category";
 
-$page = 1;
-if (isset($_GET['page'])) {
-    $page = intval($_GET['page']);
-}
-$offset = PER_PAGE * ($page - 1);
 
 $pankuzu = "";
 
@@ -59,12 +55,7 @@ if(isset($_GET["cat_id"])){
 $stmt->execute();
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-function letter($key,$num) {
-    if(mb_strlen($key) > $num){
-      $key = mb_substr($key,0,$num) . "...";
-    }
-    return $key;
-}
+
 
 $view = "";
 foreach($results as $key => $row) {
@@ -82,37 +73,7 @@ foreach($results as $key => $row) {
 $pdo = null;
 
 // ******* ページの表示設定ここから ********
-$totalPages = ceil($total / PER_PAGE);
-$pager = "";
-$pageLink = ""; // ページャ以外のGET
-//ページャーの生成
-$pager .= '<div class="pager"><ul>';
-// ページャ以外のGETをリンクに
-if (isset($_GET)) {
-    foreach ($_GET as $key => $value) {
-        if($key == "page"){
-            continue;
-        }
-        $pageLink .= "&".$key."=".$value;
-    }
-}
-if($page != 1){
-    $prev = $page-1;
-    $pager .= "<li class='first'><a href='?page=".$prev.$pageLink."'>&laquo; 前へ</a></li>";
-}
-for ($i=1; $i <= $totalPages; $i++) {
-    if($page == $i){
-        $pager .= "<li><span>".$i."</span></li>";
-    }else{
-        $pager .= "<li><a href='?page=".$i.$pageLink."'>".$i."</a></li>";
-    }
-}
-if($page != $totalPages){
-    $next = $page+1;
-    $pager .= "<li class='bext'><a href='?page=".$next.$pageLink."'>次へ &raquo;</a></li>";
-}
-
-$pager .= '</ul></div>';
+$pager = pagerMake($total,true);
 // ******* ページの表示設定ここまで ******* 
 
 include "header.php";
@@ -128,7 +89,7 @@ include "header.php";
             <div class="archiveControl">
                 <div class="displayArea">
                     <p class="displayDesc">全<span><?php echo $total; ?></span>件中<?php echo $offset + 1;?>〜<?php echo count($results) + $offset;?>件目を表示</p>
-                    <form action="archive.php?page=1<?php echo $pageLink;?>" method="post" name="pageNumChange">
+                    <form action="archive.php?page=1<?php echo $pageLink;?>" method="post" name="pageNumChange" class="pageNumChange">
                     <div class="displayVol">表示件数 <select class="searchNum" name="pageNum">
                         <option value="5" <?php if(PER_PAGE==5) echo 'selected';?> >5</option>
                         <option value="10" <?php if(PER_PAGE==10) echo 'selected';?>>10</option>

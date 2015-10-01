@@ -2,6 +2,12 @@ $(function(){
   $(window).resize(function(event) {
     setLayout();
   });
+
+  if($(".login").size() > 0){
+      loginCheck();
+    }
+  fileUpload();
+
   $('form').each(function(){
   		$(this).attr('novalidate', 'novalidate');
   });
@@ -10,14 +16,14 @@ $(function(){
 		$(".search_area").slideToggle("fast");
 	});
 
-     //すべてのチェックボタンを選択
-     $(".head input").click(function() {
+  //すべてのチェックボタンを選択
+  $(".head input").click(function() {
 		 if(this.checked){
     		$(".list .check").attr('checked','checked');
     		}else{
     		$(".list .check").removeAttr('checked');
 		}
-	 });
+	});
 	 
 	 //すべて選択する
 	 $(".all_check input").click(function(){
@@ -44,8 +50,10 @@ $(function(){
         dateFormat: "yy-mm-dd"
       });
   });
+
+  //ページ表示数のセレクト
   $(document).on("change", ".pageNum", function () {
-    document.pageNumChange.submit();
+    $(".pageNumChange").submit();
   });
 
    //文字カウント
@@ -71,21 +79,14 @@ $(function(){
         countText.css('color', '#363636');
       }
     });
-    $(".fileUp input").click(function() {
-      $(this).on('change', function(event) {
-        file = event.target.files[0];
-        var imgA = new FileReader();
-        imgA.onload = function(e){
-          e.target.result;
-        };
-        imgA.readAsDataURL(file);
 
-      });
-    });
+    //テーブルの偶数・奇数の行の色を変える
+
+    $("tr:odd").addClass("odd");
+
+
     setLayout();
-    if($(".login").size() > 0){
-      loginCheck();
-    }
+    
 
     
 });
@@ -123,6 +124,27 @@ function loginCheck() {
     
   });
 }
+function fileUpload(){
+  $(".fileupImg").on("click", function(event){
+     $("input[name=img]").trigger("click");
+  });
+  $('input[name=img]').change(function(){
+
+      if (!this.files.length) {
+          return;
+      }
+
+      var file = this.files[0],       
+          $_img = $(".thumbImg"), 
+          fileReader = new FileReader();   
+
+      fileReader.onload = function(event) {
+          $_img.attr('src', event.target.result);
+      };
+
+      fileReader.readAsDataURL(file);
+  });
+}
 function setLayout(){
   var w = $(window).width();
   var h = $(window).height();
@@ -135,37 +157,6 @@ function allControlClose(){
 	$(".allCtrl_area").slideUp("fast");
 }
 
-//テーブルの偶数・奇数の行の色を変える
-$(function(){
-     $("tr:odd").addClass("odd");
-});
-
-
-//ページトップへスクロールする※よく使用
-$(function(){
-   $('a[href^=#]').click(function() {
-      var speed = 400;// ミリ秒
-      var href= $(this).attr("href");
-      var target = $(href == "#" || href == "" ? 'html' : href);
-      var position = target.offset().top; //targetの位置を取得
-      $($.browser.safari ? 'body' : 'html').animate({scrollTop:position}, speed, 'swing');
-      return false;
-   });
-});
-
-//フォームにテキストを入れておき、フォーカスで消す（文字色も変更）
-$(function(){
-     $(".focus").focus(function(){
-          if(this.value == "キーワードを入力"){
-               $(this).val("").css("color","#f39");
-          }
-     });
-     $(".focus").blur(function(){
-          if(this.value == ""){
-               $(this).val("キーワードを入力").css("color","#969696");
-          }
-     });
-});
 
 //ツールチップ
 $(function(){

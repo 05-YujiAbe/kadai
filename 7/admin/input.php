@@ -74,7 +74,9 @@ include "sidebar.php";
                         <div class="postbox">
                             <h4>アイキャッチ画像</h4>
                             <div class="inside">
+                                <span class="fileupImg">画像をアップロードする</span>
                                 <input type="file" accept='image/*' name="img">
+                                <figure><img src=""  class="thumbImg"></figure>
                                 <!-- <a href="">画像を設定</a> -->
                             </div>
                         </div>

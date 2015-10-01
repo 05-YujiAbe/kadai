@@ -1,22 +1,17 @@
 <?php 
-include "config.php";
+include "admin/config.php";
+include "admin/function.php";
 
 // SQLのselect部分
 $sqlSelect = "news_id,news_title,news_detail,news_url,show_flg,category.cat_name,category.cat_slug,DATE_FORMAT(create_date , '%Y.%m.%d') AS create_date,DATE_FORMAT(update_date , '%Y.%m.%d') AS update_date";
 // SQLのFrom部分
 $sqlFrom = "news,category";
 $sqlWHERE = " WHERE category.cat_id = news.news_cat AND show_flg = 1 ORDER BY create_date DESC";
-$sql = "SELECT ". $sqlSelect ." FROM ". $sqlFrom ." ".$sqlWHERE." LIMIT 9";
-$stmt = $pdo->prepare($sql);
-$stmt->execute();
-$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-function letter($key,$num) {
-    if(mb_strlen($key) > $num){
-      $key = mb_substr($key,0,$num) . "...";
-    }
-    return $key;
-}
+// $sql = "SELECT ". $sqlSelect ." FROM ". $sqlFrom ." ".$sqlWHERE." LIMIT 9";
+// $stmt = $pdo->prepare($sql);
+// $stmt->execute();
+// $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$results = sqlRequest($sqlSelect,$sqlFrom,$sqlWHERE," LIMIT 9",$bindArray);
 
 $viewMain = "";
 $view = "";
