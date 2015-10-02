@@ -1,6 +1,7 @@
 <?php
 include "session.php";
-include "config.php";
+require "config.php";
+include "function.php";
     
 
 if(count($_POST) > 0){
@@ -21,7 +22,7 @@ if(count($_POST) > 0){
     $catTitle; //タイトル
     $catSlug; //スラッグ
     $catDesc; //説明
-    include "dbcategory.php";
+    $catArray = sqlRequest("*","category");
     $view = "";
     $view .= "<table>";
     $sqlWHERE = " WHERE category.cat_id = news.news_cat";

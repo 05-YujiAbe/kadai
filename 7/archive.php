@@ -12,14 +12,14 @@ $pankuzu = "";
 
 if(isset($_GET["cat_id"])){
     $cat_id = $_GET["cat_id"];
-    $sqlWHERE = " WHERE category.cat_id = news.news_cat AND show_flg = 1 AND news.news_cat = ".$cat_id;
-
-    $sql = "SELECT ". $sqlSelect ." FROM ". $sqlFrom ." ".$sqlWHERE." LIMIT ".$offset.",". PER_PAGE;
-
-    $total = $pdo->query("SELECT count(*) FROM ". $sqlFrom ." ".$sqlWHERE)->fetchColumn();
-    $stmt = $pdo->prepare($sql);
+    $sqlWHERE = " WHERE category.cat_id = news.news_cat AND show_flg = 1 AND news.news_cat = :id";
+    $bindArray = array(array('bind' => ':id', 'value' => $cat_id, 'param' => PDO::PARAM_INT));
+    $results = sqlRequest($sqlSelect,$sqlFrom,$sqlWHERE,$sqlPerPage,$bindArray);
+    $total = sqlRequest("count(*)",$sqlFrom,$sqlWHERE,null,$bindArray);
+    //$pdo->query("SELECT count(*) FROM ". $sqlFrom ." ".$sqlWHERE)->fetchColumn();
+    // $stmt = $pdo->prepare($sql);
     //パンくず取得
-    $pankuzu = $pdo->query("SELECT cat_name FROM category WHERE category.cat_id = ".$cat_id)->fetchColumn();
+    //$pankuzu = $pdo->query("SELECT cat_name FROM category WHERE category.cat_id = ".$cat_id)->fetchColumn();
 
 
 }else if(isset($_GET["s"])){
@@ -27,33 +27,27 @@ if(isset($_GET["cat_id"])){
     $s_title = $_GET["s"];
     $sqlWHERE = "  WHERE category.cat_id = news.news_cat AND news_title LIKE :search AND news_detail LIKE :search";
     $sql = "SELECT ". $sqlSelect ." FROM ". $sqlFrom ." ".$sqlWHERE." LIMIT ".$offset.",". PER_PAGE;
-    //記事総数を取得
-    $sqlPage = "SELECT count(*) FROM ". $sqlFrom ." ".$sqlWHERE; 
-    $stmt = $pdo->prepare($sql);
-    $stmt2 = $pdo->prepare($sqlPage);
-    $stmt->bindValue(':search', "%$s_title%", PDO::PARAM_STR);
-    $stmt2->bindValue(':search', "%$s_title%", PDO::PARAM_STR);
-    //記事総数を取得
-    $stmt2->execute();
-    $total = $stmt2->fetchColumn();
+    $bindArray = array(array('bind' => ':search', 'value' => "%$s_title%", 'param' => PDO::PARAM_STR));
+    $results = sqlRequest($sqlSelect,$sqlFrom,$sqlWHERE,$sqlPerPage,$bindArray);
+    $total = sqlRequest("count(*)",$sqlFrom,$sqlWHERE,null,$bindArray);
     //パンくず取得
     $pankuzu = "検索結果";
 
 }else{
     //通常の一覧ページ
     $sqlWHERE = " WHERE category.cat_id = news.news_cat AND show_flg = 1";
-    $sql = "SELECT ". $sqlSelect ." FROM ". $sqlFrom ." ".$sqlWHERE." LIMIT ".$offset.",". PER_PAGE;
-
+    //$sql = "SELECT ". $sqlSelect ." FROM ". $sqlFrom ." ".$sqlWHERE." LIMIT ".$offset.",". PER_PAGE;
+    $results = sqlRequest($sqlSelect,$sqlFrom,$sqlWHERE,$sqlPerPage);
     //記事総数を取得
-    $total = $pdo->query("SELECT count(*) FROM news")->fetchColumn();
-    $stmt = $pdo->prepare($sql);
+    $total = sqlRequest("count(*)","news");
+   
     //パンくず取得
     $pankuzu = "一覧ページ";
 }
 
 
-$stmt->execute();
-$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//$stmt->execute();
+//$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 
@@ -66,7 +60,6 @@ foreach($results as $key => $row) {
     $view .= "<div class='itemContent'><p class='title'>" .$row["news_title"]. "</p>";
     $view .= "<p class='date'>" .$row["create_date"]. "</p></div></a></li>";
     
-    
 }
 // table閉じタグで終了
 
@@ -75,7 +68,7 @@ $pdo = null;
 // ******* ページの表示設定ここから ********
 $pager = pagerMake($total,true);
 // ******* ページの表示設定ここまで ******* 
-
+//
 include "header.php";
 ?>
 <div id="contents">
@@ -89,7 +82,7 @@ include "header.php";
             <div class="archiveControl">
                 <div class="displayArea">
                     <p class="displayDesc">全<span><?php echo $total; ?></span>件中<?php echo $offset + 1;?>〜<?php echo count($results) + $offset;?>件目を表示</p>
-                    <form action="archive.php?page=1<?php echo $pageLink;?>" method="post" name="pageNumChange" class="pageNumChange">
+                    <form action="archive.php?page=1<?php echo $pager[1];?>" method="post" name="pageNumChange" class="pageNumChange">
                     <div class="displayVol">表示件数 <select class="searchNum" name="pageNum">
                         <option value="5" <?php if(PER_PAGE==5) echo 'selected';?> >5</option>
                         <option value="10" <?php if(PER_PAGE==10) echo 'selected';?>>10</option>
@@ -98,13 +91,13 @@ include "header.php";
                          </select></div>
                     </form>
                 </div>
-               <?php echo $pager;?>
+               <?php echo $pager[0];?>
             <!-- archiveControl --></div>
             <ul class="itemList heightAlign">
                 <?php echo $view; ?>
             </ul>
             <div class="archiveControl">
-                <?php echo $pager;?>
+                <?php echo $pager[0];?>
             </div>
         </article>
 

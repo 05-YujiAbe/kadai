@@ -1,6 +1,9 @@
 <?php
 include "session.php";
-include "config.php";
+require "config.php";
+include "function.php";
+
+$sqlFrom = "category";
     
 
 if(count($_POST) > 0){
@@ -10,9 +13,8 @@ if(count($_POST) > 0){
     $catSlug = htmlspecialchars($_POST["catSlug"], ENT_QUOTES, 'UTF-8');
     $catDesc = htmlspecialchars($_POST["catDesc"], ENT_QUOTES, 'UTF-8');
     // $imgurl; //画像のパス
-    $sql = "INSERT INTO category (cat_id, cat_name, cat_slug, cat_description) VALUES (NULL, '" . $catTitle . "', '" . $catSlug . "', '" . $catDesc . "') ";
-    $sql = "UPDATE category set cat_name = '" . $catTitle . "', cat_slug = '" . $catSlug . "', cat_description = '" . $catDesc . "' WHERE cat_id = " . $id;
-
+    // $sql = "INSERT INTO ". $sqlFrom ." (cat_id, cat_name, cat_slug, cat_description) VALUES (NULL, '" . $catTitle . "', '" . $catSlug . "', '" . $catDesc . "') ";
+    $sql = "UPDATE ". $sqlFrom ." set cat_name = '" . $catTitle . "', cat_slug = '" . $catSlug . "', cat_description = '" . $catDesc . "' WHERE cat_id = " . $id;
     $stmt = $pdo->prepare($sql);
     $result = $stmt->execute();
     
@@ -24,11 +26,9 @@ if(count($_POST) > 0){
     $catSlug; //スラッグ
     $catDesc; //説明
     // include "dbcategory.php";
-    $sql = "SELECT * FROM category WHERE cat_id = :id";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $sqlWHERE = "  WHERE cat_id = :id";
+    $bindArray = array(array('bind' => ':id', 'value' => $id, 'param' => PDO::PARAM_STR));
+    $results = sqlRequest("*",$sqlFrom,$sqlWHERE,null,$bindArray);
     foreach($results as $row) {
         $catTitle = $row["cat_name"]; 
         $catSlug = $row["cat_slug"]; 

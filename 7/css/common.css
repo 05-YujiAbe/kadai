@@ -400,6 +400,11 @@ a:hover {
 .ranking li dd h3 {
 	font-weight: normal;
 }
+.ranking li dd .views {
+	text-align: right;
+	color: #999;
+	font-size: 1.4rem;
+}
 .bnrArea li {
 	background-color: #bbb;
 	width: 100%;

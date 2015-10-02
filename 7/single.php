@@ -1,23 +1,16 @@
 <?php 
-include "config.php";
+include "admin/config.php";
+include "admin/function.php";
 
 $id = $_GET["news_id"];
 // SQLのselect部分
 $sqlSelect = "news_id,news_title,news_detail,news_url,news_cat,category.cat_name,category.cat_slug,DATE_FORMAT(create_date , '%Y.%m.%d') AS create_date";
 // SQLのFrom部分
 $sqlFrom = "news,category";
-$sqlWHERE = " WHERE category.cat_id = news.news_cat AND show_flg = 1 AND news.news_id = ".$id;
-$sql = "SELECT ". $sqlSelect ." FROM ". $sqlFrom ." ".$sqlWHERE;
-$stmt = $pdo->prepare($sql);
-$stmt->execute();
-$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$sqlWHERE = " WHERE category.cat_id = news.news_cat AND show_flg = 1 AND news.news_id = :id";
+$bindArray = array(array('bind' => ':id', 'value' => $id, 'param' => PDO::PARAM_STR));
 
-function letter($key,$num) {
-    if(mb_strlen($key) > $num){
-      $key = mb_substr($key,0,$num) . "...";
-    }
-    return $key;
-}
+$results = sqlRequest($sqlSelect,$sqlFrom,$sqlWHERE,null,$bindArray);
 
 $title; //タイトル
 $detail; //本文
@@ -41,14 +34,9 @@ foreach($results as $key => $row) {
 
 // 他の記事
 
-$sqlSelect = "news_id,news_title,news_detail,news_url,news_cat,category.cat_name,category.cat_slug,DATE_FORMAT(create_date , '%Y.%m.%d') AS create_date";
-// SQLのFrom部分
-$sqlFrom = "news,category";
-$sqlWHERE = " WHERE category.cat_id = news.news_cat AND show_flg = 1 AND news.news_cat = ".$cat_id ." AND news.news_id != ".$id;
-$sql = "SELECT ". $sqlSelect ." FROM ". $sqlFrom ." ".$sqlWHERE." LIMIT 6";
-$stmt = $pdo->prepare($sql);
-$stmt->execute();
-$results2 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$sqlWHERE = " WHERE category.cat_id = news.news_cat AND show_flg = 1 AND news.news_cat = ".$cat_id ." AND news.news_id != :id";
+$results2 = sqlRequest($sqlSelect,$sqlFrom,$sqlWHERE," LIMIT 6",$bindArray);
+
 $view = "";
 foreach($results2 as $key => $row) {
     //  var_dump($row);
@@ -59,6 +47,20 @@ foreach($results2 as $key => $row) {
     $view .= "<p class='date'>" .$row["create_date"]. "</p></div></a></li>";
 }
 $pankuzu = $pdo->query("SELECT cat_name FROM category WHERE category.cat_id = ".$cat_id)->fetchColumn();
+
+//viewを登録更新
+$viewWHERE = " WHERE news_id = :id";
+$viewTbl = sqlRequest("*","view",$viewWHERE,null,$bindArray);
+if(count($viewTbl) > 0){
+    $viewCount = $viewTbl[0]["views"] + 1;
+    $sql = "UPDATE view set views = '" . $viewCount . "' WHERE news_id = :id";
+}else{
+    $sql = "INSERT INTO view (news_id, views) VALUES (:id, 1) ";
+}
+$viewstmt = $pdo->prepare($sql);
+$viewstmt->bindValue(':id',$id,PDO::PARAM_INT);
+$viewstmt->execute();
+//********viewを登録更新ここまで********//
 
 $pdo = null;
 

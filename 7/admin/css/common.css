@@ -583,6 +583,9 @@ i.icon{
 .icon.iCat:before {
   content: "\f02b";
 }
+.icon.iView:before {
+  content: "\f012";
+}
 .icon.iPic:before {
   content: "\f03e";
 }

@@ -1,43 +1,31 @@
+<?php
+    $pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME.";charset=utf8", DB_USER, DB_PASSWORD);
+// SQLのselect部分
+$sqlSelect = "news.news_id,news_title,news_url,DATE_FORMAT(create_date , '%Y.%m.%d') AS create_date,view.views,category.cat_name,category.cat_slug";
+$sqlFrom = "news,view,category";
+$sqlWHERE = " WHERE news.news_cat = category.cat_id AND news.news_id = view.news_id ORDER BY view.views DESC";
+
+// SQLの実行
+$results = sqlRequest($sqlSelect,$sqlFrom,$sqlWHERE,$sqlPerPage);
+$pdo = null;
+//var_dump($results);
+$rankingview = "<ul>";
+foreach($results as $key => $row) {
+    //  var_dump($row);
+    $rankingview .= "<li><a href='single.php?news_id=" .$row["news_id"]. "'><dl><dt>";
+    $rankingview .=  "<figure><img src='admin/files/" .$row["news_url"]. "' alt=''></figure></dt>";
+    $rankingview .= "<dd><div class='sub'><span class='catIcon " .$row["cat_slug"]. "'>" .$row["cat_name"]. "</span>";
+    $rankingview .=  "<span class='date'>" .$row["create_date"]. "</span></div>";
+   // $rankingview .= "<div class='itemContent'><p class='title'>" .$row["news_title"]. "</p>";
+    $rankingview .= "<h3>" .$row["news_title"]. "</h3><p class='views'>" .$row["views"]. "view</p></dd></dl></a></li>";
+}
+$rankingview .= "</ul>";
+?>
+
 <div id="side">
         <div class="inside ranking">
             <h2>記事ランキング</h2>
-            <ul>
-                <li>
-                    <dl>
-                        <dt><figure><img src="images/item01.jpg" alt=""></figure></dt>
-                        <dd><div class="sub"><span class="catIcon play">遊ぶ</span><span class="date">2015.09.27</span></div>
-                        <h3>鹿島神宮</h3></dd>
-                    </dl>
-                </li>
-                <li>
-                    <dl>
-                        <dt><figure><img src="images/item02.jpg" alt=""></figure></dt>
-                        <dd><div class="sub"><span class="catIcon stay">泊まる</span><span class="date">2015.09.27</span></div>
-                        <h3>ホテル天地閣</h3></dd>
-                    </dl>
-                </li>
-                <li>
-                    <dl>
-                        <dt><figure><img src="images/item03.jpg" alt=""></figure></dt>
-                        <dd><div class="sub"><span class="catIcon tour">観る</span><span class="date">2015.09.27</span></div>
-                        <h3>袋田の滝</h3></dd>
-                    </dl>
-                </li>
-                <li>
-                    <dl>
-                        <dt><figure><img src="images/item04.jpg" alt=""></figure></dt>
-                        <dd><div class="sub"><span class="catIcon eat">食べる</span><span class="date">2015.09.27</span></div>
-                        <h3>竜神大吊橋</h3></dd>
-                    </dl>
-                </li>
-                <li>
-                    <dl>
-                        <dt><figure><img src="images/item01.jpg" alt=""></figure></dt>
-                        <dd><div class="sub"><span class="catIcon shop">買う</span><span class="date">2015.09.27</span></div>
-                        <h3>メロン</h3></dd>
-                    </dl>
-                </li>
-            </ul>
+            <?php echo $rankingview; ?>
         </div>
         <div class="bnrArea">
             <ul>

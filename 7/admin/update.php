@@ -1,6 +1,6 @@
 <?php
 include "session.php";
-include "config.php";
+require "config.php";
 include "function.php"; 
 
 $catArray = sqlRequest("*","category");//$catArrayを設定
@@ -39,11 +39,12 @@ if(count($_POST) > 0){
     $showFlg; //表示非表示
     $create_date; //登録日
     $update_date; //更新日
-    $sql = "SELECT news_id,news_title,news_detail,news_url,show_flg,category.cat_name,create_date,update_date FROM news,category WHERE category.cat_id = news.news_cat AND news_id = :id";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $sqlSelect = "news_id,news_title,news_detail,news_url,show_flg,category.cat_name,create_date,update_date";
+    // SQLのFrom部分
+    $sqlFrom = "news,category";
+    $sqlWHERE = " WHERE category.cat_id = news.news_cat AND news_id = :id";
+    $bindArray = array(array('bind' => ':id', 'value' => $id, 'param' => PDO::PARAM_STR));
+    $results = sqlRequest($sqlSelect,$sqlFrom,$sqlWHERE,null,$bindArray);
     foreach($results as $row) {
 
         $title = $row["news_title"];

@@ -1,6 +1,7 @@
 <?php
 include "session.php";
-include "config.php";
+require "config.php";
+include "function.php";
 
 if(count($_POST) > 0){
     //送信した場合
@@ -24,7 +25,7 @@ if(count($_POST) > 0){
     // そのまま編集画面へ
     // header("Location: update.php?id=".$id."&result=".$result);
 }
-include "dbcategory.php";
+$catArray = sqlRequest("*","category");
 $pdo = null;
 
 include "header.php";

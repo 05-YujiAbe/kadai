@@ -35,9 +35,9 @@
 	function pagerMake($total,$control = false){
 		global $page;
 		$totalPages = ceil($total / PER_PAGE);
-		$pageLink = "";
+		$pageLink = "";//URLのGETの値
 		$pager = '<div class="pager"><ul>';
-		// ページャ以外のGETをリンクに
+		// ページャ以外のGETをリンクに付けるため
 		if (isset($_GET)) {
 			foreach ($_GET as $key => $value) {
 				if($key == "page"){
@@ -67,7 +67,7 @@
 			}
 		}
 		$pager .= '</ul></div>';
-		return $pager;
+		return array($pager,$pageLink);
 	}
 	// function getCategoryAll(){
 	// 	$catsql = "SELECT * FROM category";
