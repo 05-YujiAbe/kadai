@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta property="og:title" content="Milkcocoaで作ったリアルタイムチャット" />
+    <meta property="og:type" content="chat" />
+    <meta property="og:description" content="BaaS（Milkcocoa）で作られたリアルタイムチャット" />
+    <title>Milkcocoaで作ったリアルタイムチャット</title>
+    <link rel="stylesheet" href="reset.css" type="text/css" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <!-- Auth0 lock script -->
+    <script src="//cdn.auth0.com/js/lock-7.9.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://cdn.mlkcca.com/v2.0.0/milkcocoa.js"></script>
+    <script src="common.js"></script>
+</head>
+
+<body>
+    <!-- <input type="submit" class="btn-login" value="ログイン" /> -->
+    <input type="submit" class="btn-logout" value="ログアウト" style="display:none;" />
+    <div class="logged-in-box auth0-box logged-in" >
+        <ul>
+        </ul>
+    </div>
+    <div class="another-user" >
+        <ul>
+        </ul>
+    </div>
+    
+
+    <section class="section mypage-msg">
+          
+          <div class="sec_wrap">
+            <div class="sec_cont clearfix">
+              <!-- メッセージボックスリスト -->
+              <div class="msg-box">
+                      <ul>
+                        <li>
+                            <div class="msg-box-img">
+                              <img class="avatar"/>
+                            </div>
+                            <div class="msg-box-desc">
+                              <p class="name"><span class="nickname"></span></p>
+                            </div>
+                            
+                        </li>
+                        
+                      </ul>
+                     
+                    </div>
+              <!-- メッセージボックスリスト -->
+
+              <!-- メッセージボックス本体 -->
+              <div class="msg-box-detail">
+                <div class="msg-box-detail-cont">
+
+                  <!-- 一つのメッセージボックス -->
+                  <div class="msg-display-area">
+                    <div id="dummy"></div>
+                    <!-- 日付 -->
+                    <!-- <div class="separate"><span>12/12(月)</span></div> -->
+                    <!-- 日付 -->
+
+                    <!-- 相手のメッセージ -->
+                    <!-- <div class="partner">
+                      <p class="name"><img src="images/sample_icon.png" alt=""></p>
+                      <span class="msg-window">
+                        <span class="msg-window-cont">
+                        先日はどうもありがとうございました。来週イベントをするので、よかったら遊びに来てくださいね♪</span>
+                        </span>
+                      <span class="time-stamp">12:49</span>
+                    </div> -->
+                    <!-- 相手のメッセージ -->
+
+                    <!-- 自分のメッセージ -->
+                    <!-- <div class="user">
+                      <span class="time-stamp">12:49</span>
+                      <span class="msg-window">
+                        <span class="msg-window-cont">
+                        絶対に行きます！明日友達と会社の近くに行く用事があるので、また遊びに行ってもいいですか？？
+                        </span>
+                      </span>
+                    </div> -->
+                    <!-- 自分のメッセージ -->
+
+                   
+                   
+                    <div id="messages" class="content">
+                        
+                    </div>
+                  </div>
+                  <!-- 一つのメッセージボックス -->
+
+                  <!-- 送信エリア -->
+                  <div class="msg-send-area">
+                    
+                        <textarea name="" id="content" class="text" ></textarea>
+                      <a href="" class="movie-upload"></a>
+                      <input type="submit" value="送信" class="send" id="post"> 
+                   
+                  </div>
+                  <!-- 送信エリア -->
+
+                </div>
+              </div>
+              <!-- メッセージボックス本体 -->
+
+            </div>
+          </div>
+        </section>
+
+    <p class="footer"><strong>Powered by <a href="http://mlkcca.com/">Milkcocoa</a></strong></p>
+</body>
+</html>
