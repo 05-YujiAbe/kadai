@@ -10,6 +10,7 @@ $(function(){
 		milkcocoa.logout();
 		$('.logged-in-box').hide();
 	});
+	
 	$('.btn-login').click(function(e) {
       e.preventDefault();
       lock.show(function(err, profile, token) {
@@ -27,7 +28,7 @@ $(function(){
         }
       });
     });
-
+    
   
 
 	//milkcocoa
@@ -40,13 +41,18 @@ $(function(){
 	getUser(function(err, user_id) {
 	    var ds = milkcocoa.dataStore("message");//.child(user_id)
 	    //3."message"データストアからメッセージを取ってくる
-	    console.log(user_id);
+	    //console.log(user_id);
 	    var stream = ds.stream().sort("desc").size(5);
 	    milkcocoa.dataStore('user').send({user_id}, function(err, sent){});
 	    milkcocoa.dataStore('user').on("send", function(e) {
 	        userCheck(e.value.user_id);
 
 	    });
+	   //  milkcocoa.getCurrentUser(function(err, user) {
+    	// 	  if(user) {
+		  //   console.log(user);
+		  // }
+	   //  });
 	    function userCheck(id) {
 	    	$('.another-user li').each(function(index, el) {
 	    		if(id = $(this).find('input').val()){
@@ -70,7 +76,6 @@ $(function(){
 	    		// }
 	    		
 	    		
-	    		
 	    		if(userProfile == undefined){
 	    			userDisplay(user_id,data);
 	    			
@@ -92,7 +97,23 @@ $(function(){
 	    		anotherProfile.push([$(this).find('input').val(),$(this).find('.avatar').attr('src')]);
 	    	});
 	    });
-		
+		$(document).on('click', '.another-user li', function(event) {
+			event.preventDefault();
+			if(!$(this).hasClass('.done')){
+				var au_html = '<li><div class="msg-box-img"><img class="avatar" src="'+ $(this).find('img').attr("src") +'"/></div><div class="msg-box-desc"><p class="name"><span class="nickname">'+$(this).find('span').text()+'</span></p></div><input type="hidden" value="'+ $(this).find('input[type=hidden]').val() +'"></li>';
+				$(".msg-box ul").append(au_html);
+				var viewdatastore = parseInt(user_id.replace( /facebook\|/g , "" ));
+				
+				$(".msg-box li").each(function(index, el) {
+					viewdatastore += parseInt($(this).find('input').val().replace( /facebook\|/g , "" ));
+				});
+				ds = milkcocoa.dataStore("message").child(viewdatastore);
+				stream = ds.stream().sort("desc").size(10);
+				$(".msg-display-area").empty();
+				getData();
+				$(this).addClass('.done');
+			}
+		});
 	    function getData(callback) {
 		    stream.next(function(err, datas) {
 		    	if(datas.length == 0){
@@ -111,14 +132,16 @@ $(function(){
 		        }
 		        loadflg = true;
 		    });
-		    
+		    //4."message"データストアのプッシュイベントを監視
+		    ds.on("push", function(e) {
+		        renderMessage(e);
+		        scrollBottom();
+		    });
 		}
 		getData();
-	    //4."message"データストアのプッシュイベントを監視
-	    ds.on("push", function(e) {
-	        renderMessage(e);
-	        scrollBottom();
-	    });
+	    
+
+	    
 	
 	    
 	    var last_message = "dummy";
@@ -130,7 +153,7 @@ $(function(){
 	        var timeS = new Date(message.value.date).getHours() + ":" + new Date(message.value.date).getMinutes();
 	        var nowDay = (new Date(message.value.date).getMonth()+1) + "月" + new Date(message.value.date).getDate() + "日";
 	        var date_time = "";
-	        var partnerImg = ""
+	        var partnerImg = "";
 	        date_html = '<span class="time-stamp">'+ escapeHTML(timeS) +'</span>';
 	        //月日が違う場合、月日を挿入する
 	        if(lastDay != nowDay ){
