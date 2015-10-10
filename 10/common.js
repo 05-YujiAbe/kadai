@@ -97,13 +97,18 @@ $(function(){
 	    		anotherProfile.push([$(this).find('input').val(),$(this).find('.avatar').attr('src')]);
 	    	});
 	    });
-		$(document).on('click', '.another-user li', function(event) {
+		$(document).on('click', '.another-user li,.listDel', function(event) {
 			event.preventDefault();
-			if(!$(this).hasClass('.done')){
-				var au_html = '<li><div class="msg-box-img"><img class="avatar" src="'+ $(this).find('img').attr("src") +'"/></div><div class="msg-box-desc"><p class="name"><span class="nickname">'+$(this).find('span').text()+'</span></p></div><input type="hidden" value="'+ $(this).find('input[type=hidden]').val() +'"></li>';
-				$(".msg-box ul").append(au_html);
+			console.log($(this));
+			if(!$(this).hasClass('done')){
+
+				if($(this).is('.listDel')){
+					$(this).parents("li").fadeOut('slow').remove();
+				}else{
+					var au_html = '<li><div class="msg-box-img"><img class="avatar" src="'+ $(this).find('img').attr("src") +'"/></div><div class="msg-box-desc"><p class="name"><span class="nickname">'+$(this).find('span').text()+'</span><span class="listDel">外す</span></p></div><input type="hidden" value="'+ $(this).find('input[type=hidden]').val() +'"></li>';
+					$(".msg-box ul").append(au_html);
+				}
 				var viewdatastore = parseInt(user_id.replace( /facebook\|/g , "" ));
-				
 				$(".msg-box li").each(function(index, el) {
 					viewdatastore += parseInt($(this).find('input').val().replace( /facebook\|/g , "" ));
 				});
@@ -111,9 +116,14 @@ $(function(){
 				stream = ds.stream().sort("desc").size(10);
 				$(".msg-display-area").empty();
 				getData();
-				$(this).addClass('.done');
+				if(!$(this).is('.listDel')){
+					$(this).addClass('done');
+				}
 			}
 		});
+		function displayArea(){
+
+		}
 	    function getData(callback) {
 		    stream.next(function(err, datas) {
 		    	if(datas.length == 0){
@@ -216,7 +226,7 @@ $(function(){
 	    function userDisplay(id,users,self){
 	    	var user_html = '<img class="avatar" src="'+ users.value.picture +'"/><span class="nickname">'+users.value.name+'</span><input type="hidden" value="'+ users.value.userID +'" />';
 	    	if(id == users.value.userID){
-	        	$(".logged-in-box ul").prepend('<li class="myaccount">'+ user_html +'</li>');
+	        	$(".logged-in-box ul").prepend('<li class="myaccount">'+ user_html +'<input type="submit" class="btn-logout" value="ログアウト"  /></li>');
 	        	myaccount = users.value.name;
 	    	}else{
 	        	$(".another-user ul").prepend('<li>'+ user_html +'<a href="">リクエスト</a></li>');
@@ -262,17 +272,18 @@ function getUser(callback) {
       // 現在ユーザーがログインしていたら'user'にユーザー情報を渡す
 
       milkcocoa.user(function(err, user) {
-      	
+      	console.log(err,user);
         // エラーが出たらストップ
         if (err) {
+        	
           callback(err);
           return;
         }
 
         // ログインしていたら
         if(user) {
-
           // ログイン後処理
+
           callback(null, user.sub);
           
         }
