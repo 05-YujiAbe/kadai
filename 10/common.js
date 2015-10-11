@@ -9,6 +9,7 @@ $(function(){
 		event.preventDefault();
 		milkcocoa.logout();
 		$('.logged-in-box').hide();
+		location.href = "";
 	});
 	
 	$('.btn-login').click(function(e) {
@@ -41,7 +42,7 @@ $(function(){
 	getUser(function(err, user_id) {
 	    var ds = milkcocoa.dataStore("message");//.child(user_id)
 	    //3."message"データストアからメッセージを取ってくる
-	    //console.log(user_id);
+	    
 	    var stream = ds.stream().sort("desc").size(5);
 	    milkcocoa.dataStore('user').send({user_id}, function(err, sent){});
 	    milkcocoa.dataStore('user').on("send", function(e) {
@@ -50,7 +51,7 @@ $(function(){
 	    });
 	   //  milkcocoa.getCurrentUser(function(err, user) {
     	// 	  if(user) {
-		  //   console.log(user);
+		 
 		  // }
 	   //  });
 	    function userCheck(id) {
@@ -99,7 +100,7 @@ $(function(){
 	    });
 		$(document).on('click', '.another-user li,.listDel', function(event) {
 			event.preventDefault();
-			console.log($(this));
+			
 			if(!$(this).hasClass('done')){
 
 				if($(this).is('.listDel')){
@@ -116,9 +117,20 @@ $(function(){
 				stream = ds.stream().sort("desc").size(10);
 				$(".msg-display-area").empty();
 				getData();
+				loadflg = false; //いきなり自動読み込みするのを阻止
 				if(!$(this).is('.listDel')){
 					$(this).addClass('done');
+				}else{
+					var valcheck = $(this).parents("li").find('input').val();
+					console.log(valcheck);
+					$(".another-user li").each(function(index, el) {
+						if($(this).find('input').val() == valcheck ){
+							$(this).removeClass('done')
+						}
+					});
+					
 				}
+				scrollBottom();
 			}
 		});
 		function displayArea(){
@@ -172,7 +184,7 @@ $(function(){
 	        //自分以外の時画像を入れる
 	        if(user_id != message.value.useId){
 	        	$.each(anotherProfile,function(index,val){
-	        		//console.log(val[0]);
+	        		
 	        		if(val[0] == message.value.useId){
 	        			partnerImg = '<p class="name"><img src="'+ val[1] +'" alt=""></p>';
 	        		}
@@ -219,7 +231,7 @@ $(function(){
 		                name: user.nickname,
 		                picture: user.picture
 		            }, function (err,pushed) {
-		            	 console.log(pushed);
+		            	 //console.log(pushed);
 		        });
 
 		}
@@ -266,7 +278,7 @@ function escapeHTML(val) {
 };
 function scrollBottom() {
 	 $('.msg-box-detail-cont').scrollTop($(".msg-display-area").outerHeight());
-	// console.log($(".msg-display-area").outerHeight());
+	 loadflg = true;
 };
 function getUser(callback) {
       // 現在ユーザーがログインしていたら'user'にユーザー情報を渡す
