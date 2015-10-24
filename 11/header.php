@@ -6,9 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script src="js/jquery-2.1.3.min.js"></script>
+<script src="js/nivo-lightbox.min.js"></script>
 <script src="js/common.js"></script>
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/font-awesome.css">
+<link rel="stylesheet" href="css/nivo-lightbox.css">
+<link type="text/css" href="css/themes/default/default.css" rel="stylesheet" media="all" />
 <link rel="stylesheet" href="css/common.css">
 
 </head>

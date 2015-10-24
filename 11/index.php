@@ -16,6 +16,7 @@ $data = json_decode($json_data);
 	
 </script>
 <body>
+<div class="loading"><img src="css/loader.gif" alt=""></div>
 <div class="attend"></div>
 	<header>
 		<h1>G's Gourmet</h1>
@@ -35,20 +36,26 @@ $data = json_decode($json_data);
 		</div>
 		<div class="searchArea">
 			<form action="search.php" method="post" class="toSearchArea">
-			<p class="rangeSelect">距離：<label><input type="radio" name="range" value="1" checked="checked"> 300m以内</label><label><input type="radio" name="range" value="2"> 500m以内</label><label><input type="radio" name="range" value="3"> 1000m以内</label></p>
+			
 			<ul class="findSelect">
 
-				<li class="janre"><input type="text" value="" placeholder="例：ラーメン、カフェ" class="ji" readonly="readonly"><input type="hidden" class="jic" name="janre"></li>
+				<li class="janre"><input type="text" value="" placeholder="カテゴリーを選択" class="ji" readonly="readonly"><input type="hidden" class="jic" name="janre"></li>
 				<li class="place"><input type="text" value="現在地から探す" placeholder="現在地から探す" class="pi" name="place"></li>
 			</ul>
 			<input type="hidden" value="" name="lat">
 			<input type="hidden" value="" name="lng">
-			</form>
+			
 			<ul class="findList">
 			</ul>
-		</div>
-		<div class="resultArea">
-			<div id="gmap"></div>
+			<p class="rangeSelect">距離：<label><input type="radio" name="range" value="1" checked="checked"> 300m以内</label><label><input type="radio" name="range" value="2"> 500m以内</label><label><input type="radio" name="range" value="3"> 1000m以内</label></p>
+			<p class="rangeSelect">条件を指定して絞り込む：
+				<label><input type="checkbox" name="mobilephone" value="1"> 携帯の電波が入る</label>
+				<label><input type="checkbox" name="outret" value="1"> 電源あり</label>
+				<label><input type="checkbox" name="wifi" value="1"> wifiあり</label>
+				<label><input type="checkbox" name="microphone" value="1"> マイクあり</label>
+				<label><input type="checkbox" name="projecter_screen" value="1"> プロジェクター・スクリーンあり</label>
+			</p>
+			</form>
 		</div>
 		<div class="shopInfo">
 			

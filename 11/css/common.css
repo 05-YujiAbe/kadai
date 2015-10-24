@@ -12,12 +12,12 @@ body {
 header {
     background-color: #00a7ea;
     color: #fff;
-    padding: 3%;
+    padding: 2%;
 }
 h1 {
     text-align: center;
-    margin-bottom: 3%;
-    font-size: 1.6rem;
+    margin-bottom: 2%;
+    font-size: 3rem;
 }
 input[type=text]{
     border: 1px solid #ddd;
@@ -26,6 +26,21 @@ input[type=text]{
        -moz-box-sizing: border-box;
             box-sizing: border-box;
     width: 100%;
+}
+.loading {
+    display: none;
+    position: absolute;
+    background-color: rgba(255,255,255,0.7);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    z-index: 999;
+}
+.loading img {
+    margin-top: 20%;
 }
 .control {
 position: relative;
@@ -100,7 +115,7 @@ main > div {
 }
 .start p {
     
-    padding: 15% 0;
+    padding: 5% 0;
 }
 .start i{
     font-size: 80px;
@@ -112,7 +127,7 @@ main > div {
 }
 .searchArea {
     display: none;
-    height: 100%;
+    min-height: 100%;
     padding: 2%;
     background-color: #dfdfdf;
 }
@@ -120,7 +135,7 @@ main > div {
     padding: 2%;
 }
 .rangeSelect label {
-    margin-left: 2em;
+    margin-left: 0em;
     cursor: pointer;
 }
 .rangeSelect input {
@@ -141,6 +156,7 @@ main > div {
 .findList {
     background-color: #fafafa;
     display: none;
+    margin-bottom: 2%;
 }
 .findList li {
  padding: 3% 2%;
@@ -272,4 +288,53 @@ i.select.fa-heart-o:before {
 }
 .attend.delete {
     background-color: #F27398;
+}
+.rangeSelect {
+    -webkit-border-radius: 5px;
+            border-radius: 5px;
+    padding: 1.5% 1%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin-bottom: 2%;
+}
+.rangeSelect label {
+    display: block;
+    padding: 2% 1%;
+}
+@media screen and (min-width: 960px) {
+    .findSelect li input {
+        padding: 1%;
+    }
+    .findList li {
+        padding: 1%;
+    }
+    .findList:after {
+        clear: both;
+        content: "";
+        display: table;
+    }
+    .findList li.janreItem {
+        width: 33.33%;
+        float: left;
+        cursor: pointer;
+    }
+    .findList li.janreItem:hover {
+        background-color: #eee;
+    }
+    .goSearch {
+        padding: 1.5% 1em;
+        cursor: pointer;
+    }
+    .goSearch a {
+        font-size: 1.4rem;
+    }
+    .rangeSelect {
+       
+    }
+    .rangeSelect label {
+        display: inline-block;
+        padding: 0;
+        margin-left: 1em;
+    }
+    
 }

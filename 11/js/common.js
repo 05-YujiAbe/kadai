@@ -81,10 +81,12 @@ $(function(){
 	$(document).on('click', '.search', function(event) {
 		var s = $(".place input").val();
 		catS = $(".janre input[type=hidden]").val();
+		$(".loading").fadeIn("slow");
+		historyInputSave(s);
 		locationSet(s);
 
 		// $(".toSearchArea").submit();
-		//historyInputSave(s);
+		
 		// atMove(".resultArea");
 		// $(".control .cancel").addClass('toArchive').html("—ÊË÷»­Ãæ¤Ë‘ø¤ë");
 		// $(".control .search").hide();
@@ -98,7 +100,7 @@ $(function(){
 		}else{
 			$(".place input").val($(this).html());
 		}
-		
+		setLayout();
 	});
 	$(document).on('focus', '.findSelect input', function(event) {
 		if($(this).is(".pi")){
@@ -121,9 +123,17 @@ $(function(){
 		});
 		removeFavorite($(this).find('input').val());
 	});
+	$(document).on('click', '.nivo', function(event) {
+		event.preventDefault();
+		$(this).trigger($('.nivo').nivoLightbox());
+	});
+
+	nivoSet();
 	
 });
-
+function nivoSet(){
+	$('.nivo').nivoLightbox();
+}
 
 // ÒÔÏÂévÊý
 function locationSet(point){
@@ -232,10 +242,10 @@ function gurunaviDisplay(data){
 	                    + "<p class='name'><span>" + shopName + "</span><i class='fa fa-heart-o " + faCheck + "'><input type='hidden' value='"+ shopId +"'></i></p>"
 	                    + "<p class='address'>" + shopAdd + "</p>"
 	                    + "<p class='tel'>TEL:" + shopTel + "</p>"
-	                    + "<p class='url'><a href='"+ shopUrl+ "' target='_blank'>お店のHPをみる</a></p>"
+	                    + "<p class='url'><a href='"+ shopUrl+ "' class='nivo' data-lightbox-type='iframe'>お店のHPをみる</a></p>"
 	                    +"</div></div>";
-
-	        // Çéˆó¥¦¥£¥ó¥É¥¦¤ò×÷³É
+	        
+	        
 	        var infoWin = new google.maps.InfoWindow({maxWidth:300});
 	        infoWin.setContent(html);
 
@@ -246,9 +256,12 @@ function gurunaviDisplay(data){
 	            }
 	            infoWin.open(map, markerObj);
 	            currentInfoWin = infoWin;
+	            nivoSet();
 	            // console.log(currentInfoWin.content);
 	        });
 	  	});
+		
+		
    
 }
 function gurunaviCat(result){
@@ -263,6 +276,7 @@ function gurunaviCat(result){
   });
 	  
 }
+
 function atMove(e){
 	if(e == ".searchArea"){
 		$(".goSearch").hide();
@@ -330,7 +344,7 @@ function setLayout(){
 	var h = $(window).height();
 	var headHei = $("header").outerHeight();
 	var footHei = $("footer").outerHeight();
-	$("main").css("height",h-headHei-footHei)
+	$("main").css("height",h-headHei-footHei);
 }
 // ÈÕ±¾¾•¶È½U¶È¡¡¡ú¡¡º£Íâ¾•¶È½U¶È
 function geo_japan2world(lat,lng){
