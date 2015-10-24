@@ -122,7 +122,7 @@ $(function(){
 					$(this).addClass('done');
 				}else{
 					var valcheck = $(this).parents("li").find('input').val();
-					console.log(valcheck);
+					//console.log(valcheck);
 					$(".another-user li").each(function(index, el) {
 						if($(this).find('input').val() == valcheck ){
 							$(this).removeClass('done')

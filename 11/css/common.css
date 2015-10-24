@@ -1,0 +1,275 @@
+@charset "utf-8";
+html {
+    font-size: 62.5%;
+}
+body {
+    font-size: 1.4rem;
+}
+/* 
+メインカラー
+#00a7ea
+ */
+header {
+    background-color: #00a7ea;
+    color: #fff;
+    padding: 3%;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 3%;
+    font-size: 1.6rem;
+}
+input[type=text]{
+    border: 1px solid #ddd;
+    padding: 2px;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    width: 100%;
+}
+.control {
+position: relative;
+height: 40px;
+ width: 100%;
+ display: none;
+}
+.control.dpb {
+    display: block;
+}
+.control:after {
+    content:"";
+    display: table;
+    clear: both;
+}
+.control a {
+    color: #fff;
+}
+.control span {
+    position: absolute;
+    top: 5px;
+    font-size: 1.2rem;
+    display: inline-block;
+    padding: 10px 1.5em;
+    border: 1px solid #fff;
+    -webkit-border-radius: 5px;
+            border-radius: 5px;
+    cursor: pointer;
+}
+.cancel {
+    left: 3%;
+}
+.search {
+    right: 3%;
+}
+.goSearch {
+    width: 94%;
+    margin: 0 auto;
+    padding: 8px 1em;
+    background-color: #006a94;
+    -webkit-border-radius: 5px;
+            border-radius: 5px;
+    color: #ddd;
+    font-size: 1.2rem;
+}
+.goSearch a {
+    text-decoration: none;
+    color: #ddd;
+}
+.goSearch i {
+    margin-right: 10px;
+}
+main {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    overflow: auto;
+    position: relative;
+}
+main:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+main > div {
+    float: left;
+    width: 100%;
+}
+.start {
+    padding: 10px;
+    text-align: center;
+}
+.start p {
+    
+    padding: 15% 0;
+}
+.start i{
+    font-size: 80px;
+    color: #00a7ea;
+}
+.start a {
+    display: inline-block;
+    margin-top: 20px;
+}
+.searchArea {
+    display: none;
+    height: 100%;
+    padding: 2%;
+    background-color: #dfdfdf;
+}
+.rangeSelect{
+    padding: 2%;
+}
+.rangeSelect label {
+    margin-left: 2em;
+    cursor: pointer;
+}
+.rangeSelect input {
+    vertical-align: top;
+}
+.findSelect li {
+    margin-bottom: 2%;
+}
+.findSelect li input {
+    padding: 2%;
+    font-size: 1.4rem;
+    -webkit-border-radius: 5px;
+            border-radius: 5px;
+    /*-webkit-box-shadow: 0 0 10px #eee inset;
+            box-shadow: 0 0 10px #eee inset;*/
+    border: 1px solid #ccc;
+}
+.findList {
+    background-color: #fafafa;
+    display: none;
+}
+.findList li {
+ padding: 3% 2%;
+ border-bottom: 1px dotted #ccc;
+ color: #888;
+}
+.findList li:last-child {
+    border: none;
+}
+.resultArea{
+ width: 100%;
+ height: 100%;
+}
+#gmap {
+ width: 100%;
+ height: 100%;   
+}
+.shopInfo {
+    display: none;
+}
+.shopListArea {
+    display: none;
+    height: 100%;
+    padding: 2%;
+    background-color: #dfdfdf;
+    overflow: auto;
+}
+.shopListArea li {
+ padding: 3% 2%;
+ border-bottom: 1px dotted #ccc;
+ color: #888;
+ background-color: #fff;
+}
+.shopListArea li:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+.shopListArea li a {
+    text-decoration: none;
+    display: block;
+    width: 90%;
+    float: left;
+}
+.shopListArea li strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #00a7ea;
+}
+.shopListArea li a span {
+    color: #aaa;
+}
+.shopListArea li span.delete {
+    width: 10%;
+    display: block;
+    height: 100%;
+    text-align: center;
+    float: left;
+    padding: 10px 0;
+}
+.shopListArea li span.delete i {
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+.shopListArea li:last-child {
+    border: none;
+}
+footer {
+    height: 50px;
+    background-color: #f3f3f3;
+}
+.navi {
+    width: 100%;
+    padding-top: 8px;
+    border-top: 1px solid #ddd;
+}
+.navi:after {
+    display: table;
+    content: "";
+    clear: both;
+}
+.navi li {
+    float: left;
+    width: 25%;
+    font-size: 1rem;
+    text-align: center;
+    color: #666;
+    cursor: pointer;
+}
+.navi li i {
+    display: block;
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+.infoWindowTxt {
+    font-size: 1.2rem;
+}
+.infoWindowTxt .name {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #00a7ea;
+    font-size: 1.4rem;
+}
+.infoWindowTxt .name i {
+    margin-left: 20px;
+    color: #999;
+}
+i.select.fa-heart-o:before {
+    content: "\f004";
+}
+.infoWindowTxt .name i.select {
+    color: #F27398;
+}
+.infoWindowTxt p {
+    margin-bottom: 3px;
+}
+.attend {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    color: #fff;
+    background-color: #F27398;
+    text-align: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+}
+.attend.delete {
+    background-color: #F27398;
+}
